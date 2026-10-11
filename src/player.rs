@@ -177,6 +177,20 @@ impl Player {
             glib::ControlFlow::Continue
         });
 
+        // Periodic progress reports (Jellyfin play sessions).
+        let weak = self.weak();
+        glib::timeout_add_seconds_local(10, move || {
+            let Some(i) = weak.upgrade() else { return glib::ControlFlow::Break };
+            let id = i.state.songId();
+            if i.playbin.current_state() == gst::State::Playing && !id.is_empty() && let Some(integ) = integration::current() {
+                let pos = i.state.positionSeconds();
+                spawn_local(async move {
+                    let _ = integ.call(move |b| async move { b.playback_report(&id, crate::backend::PlaybackReport::Progress, pos).await }).await;
+                });
+            }
+            glib::ControlFlow::Continue
+        });
+
         // React to song changes
         let weak = self.weak();
         self.0.state.connect_notify_local(Some("songId"), move |_, _| {

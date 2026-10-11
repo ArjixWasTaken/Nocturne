@@ -243,7 +243,39 @@ impl LoginDialog {
 
     #[template_callback]
     fn quick_connect_button_clicked(&self) {
-        // TODO: Jellyfin QuickConnect once `backend::jellyfin::quick_connect_*` helpers exist.
-        self.imp().toast_overlay.add_toast(adw::Toast::new("Quick Connect is not available yet"));
+        use crate::{backend::jellyfin, runtime::run};
+        let conn = self.connection();
+        let obj = self.clone();
+        spawn_local(async move {
+            let (url, trust) = (conn.url.clone(), conn.trust_server);
+            let (secret, code) = match run(async move { jellyfin::quick_connect_initiate(&url, trust).await }).await {
+                Ok(r) => r,
+                Err(e) => {
+                    tracing::warn!("quick connect: {e:#}");
+                    (String::new(), String::new())
+                }
+            };
+            let dialog = adw::AlertDialog::new(Some("Quick Connect"), Some(if code.is_empty() { "Error getting code" } else { &code }));
+            dialog.set_extra_child(Some(&gtk::LinkButton::with_label(&format!("{}/web/#/quickconnect", conn.url), "Quick Connect Page")));
+            dialog.add_response("cancel", "Cancel");
+            dialog.set_close_response("cancel");
+            dialog.present(Some(&obj));
+            if secret.is_empty() {
+                return;
+            }
+            for _ in 0..5 {
+                glib::timeout_future_seconds(5).await;
+                if dialog.root().is_none() {
+                    return;
+                }
+                let (url, s) = (conn.url.clone(), secret.clone());
+                if run(async move { jellyfin::quick_connect_check(&url, trust, &s).await }).await.unwrap_or(false) {
+                    dialog.close();
+                    obj.login(Connection { password: secret, ..conn });
+                    return;
+                }
+            }
+            dialog.close();
+        });
     }
 }

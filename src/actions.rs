@@ -121,7 +121,7 @@ fn toast(title: &str) {
 fn custom_toast(title: &str, subtitle: &str, icon: Option<&str>, paintable: Option<gdk::Paintable>) {
     let row = adw::ActionRow::builder().title(title).subtitle(subtitle).build();
     if let Some(icon) = icon {
-        row.set_icon_name(Some(icon));
+        row.add_prefix(&gtk::Image::from_icon_name(icon));
     } else {
         let img = gtk::Image::builder()
             .css_classes(["card"])

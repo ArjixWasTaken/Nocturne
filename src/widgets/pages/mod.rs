@@ -113,7 +113,7 @@ pub(crate) fn on_short_content(sw: &gtk::ScrolledWindow, f: impl Fn() + 'static)
 // ---------- searchable list pages (albums / artists / songs / playlists) ----------
 
 #[derive(Clone, Copy, PartialEq, Eq)]
-pub(crate) enum Kind {
+pub enum Kind {
     Album,
     Artist,
     Song,
@@ -133,7 +133,7 @@ impl Kind {
 
 /// Template children shared by the searchable list pages.
 #[derive(Clone)]
-pub(crate) struct ListParts {
+pub struct ListParts {
     pub main_stack: gtk::Stack,
     pub list: gtk::ListBox,
     /// Inner stack of a `NocturneSongQueue`, if the list is one.
@@ -144,7 +144,7 @@ pub(crate) struct ListParts {
 }
 
 #[derive(Default)]
-pub(crate) struct Lister {
+pub struct Lister {
     pub offset: Cell<u32>,
     pub searching: Cell<bool>,
     pub generation: Cell<u32>,

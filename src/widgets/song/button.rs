@@ -52,8 +52,9 @@ mod imp {
         #[template_callback]
         fn show_popover_image(&self, #[rest] args: &[glib::Value]) {
             let Some(m) = self.model.borrow().clone() else { return };
-            let (_, x, y) = context::gesture_point(args);
-            context::popup_items(&*self.obj(), &context::simple_song_items(&m.id()), &m.id(), x, y);
+            let (w, x, y) = context::gesture_point(args);
+            let w = w.unwrap_or_else(|| self.obj().clone().upcast());
+            context::popup_items(&w, &context::simple_song_items(&m.id()), &m.id(), x, y);
         }
         #[template_callback]
         fn show_popover_artist(&self, #[rest] args: &[glib::Value]) {

@@ -5,7 +5,7 @@ pub mod row;
 pub mod selector_row;
 
 pub use button::PlaylistButton;
-pub use dialog::{PlaylistDialog, prompt_add_songs};
+pub use dialog::PlaylistDialog;
 pub use page::PlaylistPage;
 pub use row::PlaylistRow;
 pub use selector_row::PlaylistSelectorRow;

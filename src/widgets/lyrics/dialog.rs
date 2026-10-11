@@ -68,7 +68,7 @@ mod imp {
         }
         #[template_callback]
         fn position_spin_changed(&self, spin: &gtk::SpinButton) -> bool {
-            if spin.is_sensitive() && spin.has_focus() {
+            if spin.is_sensitive() && spin.root().is_some() {
                 seek(spin.value());
             }
             false

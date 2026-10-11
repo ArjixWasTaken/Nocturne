@@ -124,6 +124,7 @@ pub fn simple_song_items(id: &str) -> Vec<Item> {
     song_items(id).without(&["edit-radio", "delete-radio", "remove", "select"])
 }
 
+#[allow(dead_code)]
 pub fn lyrics_items() -> Vec<Item> {
     build(&[
         it("edit", "Edit Lyrics", "document-edit-symbolic", "app.edit_lyrics"),
