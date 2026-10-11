@@ -243,6 +243,47 @@ fn edit_radio(id: Option<String>) {
     });
 }
 
+fn edit_playlist(id: Option<String>) {
+    let Some(integ) = integration::current() else { return };
+    let list = gtk::ListBox::builder().selection_mode(gtk::SelectionMode::None).css_classes(["boxed-list"]).build();
+    let name_el = adw::EntryRow::builder().title("Name").build();
+    if let Some(id) = &id {
+        name_el.set_text(&integ.playlist(id).name());
+    }
+    list.append(&name_el);
+    let editing = id.is_some();
+    let dialog = alert(if editing { "Update Playlist" } else { "Create Playlist" }, "");
+    dialog.set_extra_child(Some(&list));
+    dialog.add_responses(&[("cancel", "Cancel"), ("create", if editing { "Update" } else { "Create" })]);
+    dialog.set_response_appearance("create", adw::ResponseAppearance::Suggested);
+    let parent = active_window();
+    spawn_local(async move {
+        if dialog.choose_future(Some(&parent)).await != "create" {
+            return;
+        }
+        let name = name_el.text().trim().to_string();
+        if name.is_empty() {
+            return;
+        }
+        let r = match id.clone() {
+            Some(pid) => integ.call(move |b| async move { b.update_playlist(&pid, Some(&name), &[], &[]).await.map(|_| pid) }).await,
+            None => integ.call(move |b| async move { b.create_playlist(&name, &[]).await }).await,
+        };
+        match r {
+            Ok(pid) => {
+                integ.verify_playlist(&pid, true).await;
+                main_window().reload_visible_page();
+                refresh_sidebar();
+                toast(if editing { "Playlist updated successfully" } else { "Playlist created successfully" });
+            }
+            Err(e) => {
+                tracing::warn!("playlist: {e:#}");
+                toast(if editing { "Error updating playlist" } else { "Error creating playlist" });
+            }
+        }
+    });
+}
+
 // ---------- downloads ----------
 
 /// Start downloading `id`; false if it is already downloaded or queued.
@@ -655,8 +696,8 @@ pub fn register(app: &Application) {
         let songs = queue::shuffled(playlist_songs(&i, &id).await);
         queue::replace(&songs, None, &id);
     });
-    s(app, "update_playlist", |id| present(&playlist_dialog::PlaylistDialog::new(Some(&id).filter(|i| !i.is_empty()).map(|s| s.as_str()))));
-    none(app, "create_playlist", &[], || present(&playlist_dialog::PlaylistDialog::new(None)));
+    s(app, "update_playlist", |id| edit_playlist(Some(id).filter(|i| !i.is_empty())));
+    none(app, "create_playlist", &[], || edit_playlist(None));
     dict(app, "remove_songs_from_playlist", |d| {
         let Some(i) = integration::current() else { return };
         let id = d_str(&d, "playlist");

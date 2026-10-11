@@ -1,5 +1,5 @@
 //! `NocturneHomePage` (pages/home.blp): overview carousels and global search.
-use super::{LibraryPage, average_color, set_enum_property};
+use super::{LibraryPage, average_color};
 use crate::{
     backend::{AlbumListKind, SearchCounts},
     config::{data_dir, settings},
@@ -84,7 +84,7 @@ mod imp {
             let inner = self.song_wrapbox.list();
             inner.set_margin_start(10);
             inner.set_margin_end(10);
-            set_enum_property(&inner, "justify", "fill");
+            crate::widgets::containers::context::set_enum(&inner, "justify", "fill");
             inner.set_property("justify-last-line", true);
             inner.set_property("child-spacing", 5i32);
             inner.set_property("line-spacing", 5i32);

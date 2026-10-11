@@ -106,6 +106,8 @@ mod imp {
         #[template_child]
         pub main_stack: TemplateChild<gtk::Stack>,
         #[template_child]
+        pub downloads_button_el: TemplateChild<crate::widgets::containers::DownloadsQueueButton>,
+        #[template_child]
         pub toast_overlay: TemplateChild<adw::ToastOverlay>,
         /// The `Adw.Sidebar` (libadwaita 1.9) currently in `sidebar_bin`.
         pub sidebar: RefCell<Option<gtk::Widget>>,
@@ -261,6 +263,7 @@ impl Window {
         let Some(integ) = integration::current() else { return };
         imp.sidebar_playlists.borrow_mut().clear();
         self.setup_sidebar();
+        imp.downloads_button_el.setup();
         self.show_content();
         if let Some(d) = self.visible_dialog() {
             d.close();
