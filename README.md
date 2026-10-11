@@ -90,45 +90,18 @@ flatpak-builder build com.jeffser.Nocturne.yml --force-clean --install-deps-from
 flatpak-builder --run build com.jeffser.Nocturne.yml nocturne
 ```
 
-### macOS
+### From source (Rust)
 
-#### 1. Install Dependencies with [Homebrew](https://brew.sh/)
+Nocturne is written in Rust (gtk4-rs, libadwaita-rs, tokio, sqlx, gstreamer-rs). You need a Rust toolchain plus the development packages for GTK 4, libadwaita >= 1.9, GStreamer and `blueprint-compiler`.
+
 ```sh
-brew install python@3.14 meson ninja pkgconf \
-  glib gtk4 libadwaita pygobject3 gstreamer \
-  gobject-introspection libsecret \
-  desktop-file-utils
-```
+# Development run (schemas compiled into the build dir)
+glib-compile-schemas --targetdir=target data/
+GSETTINGS_SCHEMA_DIR=target cargo run
 
-#### 2. Install Project & Packages
-```sh
-# 1. Install blueprint-compiler
-git clone https://github.com/GNOME/blueprint-compiler
-cd blueprint-compiler
-meson build --prefix=/usr/local
-sudo ninja install -C build
-cd ..
-
-# 2. Clone the project
-git clone https://github.com/Jeffser/Nocturne/
-cd Nocturne
-
-# 3. Install python packages
-python3 -m venv ./venv
-source ./venv/bin/activate
-pip install requests colorthief syncedlyrics tinytag mpris-server
-```
-
-#### 3. Build Project
-```sh
+# Install
 meson setup build --prefix=$HOME/.local
-ninja -C build
-ninja install -C build
-```
-
-#### 4. Run Development Build
-```sh
-nocturne
+ninja -C build install
 ```
 
 ## Running Nocturne From Terminal
@@ -155,18 +128,13 @@ nocturne --help
 ## Dependencies
 
 The following dependencies are requirements of the project in case you want to package it.
-- `python3 >= 3.13`
+- Rust >= 1.88 (edition 2024)
 - `gtk4`
 - `libadwaita-1 >= 1.9`
 - `glib-2.0 >= 2.84.0`
 - `libsecret`
 - `gstreamer`
 - `blueprint-compiler >= 0.18.0`
-- `python-requests >= 2.33.1`
-- `python-colorthief >= 0.2.1`
-- `python-syncedlyrics >= 1.0.1`
-- `python-mpris-server >= 0.10.0`
-- `python-tinytag >= 2.2.1`
 - `gst-plugin-gtk4` (optional, needed for video rendering)
 
 ## Special Thanks

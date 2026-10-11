@@ -7,19 +7,9 @@ desktop_file = i18n.merge_file(
   install_dir: get_option('datadir') / 'applications'
 )
 
-searchprovider_desktop_file = i18n.merge_file(
-        input: 'com.jeffser.Nocturne.SearchProvider.desktop.in',
-       output: 'com.jeffser.Nocturne.SearchProvider.desktop',
-         type: 'desktop',
-       po_dir: '../po',
-      install: true,
-  install_dir: get_option('datadir') / 'applications'
-)
-
 desktop_utils = find_program('desktop-file-validate', required: false)
 if desktop_utils.found()
   test('Validate desktop file', desktop_utils, args: [desktop_file])
-  test('Validate search provider desktop file', desktop_utils, args: [searchprovider_desktop_file])
 endif
 
 appstream_file = i18n.merge_file(
@@ -49,23 +39,6 @@ service_conf.set('bindir', get_option('prefix') / get_option('bindir'))
 configure_file(
   input: 'com.jeffser.Nocturne.service.in',
   output: 'com.jeffser.Nocturne.service',
-  configuration: service_conf,
-  install_dir: get_option('datadir') / 'dbus-1' / 'services'
-)
-
-search_conf = configuration_data()
-search_conf.set('object_path', '/com/jeffser/Nocturne/SearchProvider')
-search_conf.set('bindir', get_option('prefix') / get_option('bindir'))
-configure_file(
-  input: 'com.jeffser.Nocturne.search-provider.ini',
-  output: 'com.jeffser.Nocturne.search-provider.ini',
-  configuration: search_conf,
-  install_dir: get_option('datadir') / 'gnome-shell' / 'search-providers',
-)
-
-configure_file(
-  input: 'com.jeffser.Nocturne.SearchProvider.service.in',
-  output: 'com.jeffser.Nocturne.SearchProvider.service',
   configuration: service_conf,
   install_dir: get_option('datadir') / 'dbus-1' / 'services'
 )

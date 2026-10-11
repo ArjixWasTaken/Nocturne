@@ -1,0 +1,36 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $NocturneDownloadsQueueButton: Adw.Bin {
+  visible: false;
+  child: Gtk.MenuButton menu_button {
+    notify::active => $button_activated();
+    icon-name: "folder-download-symbolic";
+    popover: Gtk.Popover {
+      child: Adw.PreferencesGroup {
+        title: _("Downloads Queue");
+        description: _("Downloaded songs are available in offline mode");
+        header-suffix: Gtk.Button {
+          styles [
+            "flat",
+            "circular"
+          ]
+          valign: center;
+          icon-name: "cross-large-symbolic";
+          tooltip-text: _("Clear Done Downloads");
+          clicked => $clear_done_downloads();
+        };
+        Gtk.ScrolledWindow {
+          propagate-natural-height: true;
+          max-content-height: 480;
+          child: Gtk.ListBox download_list_el {
+            styles [
+              "boxed-list"
+            ]
+            selection-mode: none;
+          };
+        }
+      };
+    };
+  };
+}

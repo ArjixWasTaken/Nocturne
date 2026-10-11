@@ -1,0 +1,71 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $NocturneEqualizerPage: Adw.Bin {
+  child: Gtk.ScrolledWindow scrolled {
+  max-content-width: 500;
+  max-content-height: 400;
+  child: Adw.Clamp {
+    maximum-size: 800;
+    tightening-threshold: 600;
+    child: Adw.Clamp {
+      vexpand: true;
+      orientation: vertical;
+      maximum-size: 500;
+      tightening-threshold: 400;
+
+      child: Gtk.Box {
+        orientation: vertical;
+        spacing: 10;
+
+        Gtk.MenuButton {
+          label: _("Presets");
+          halign: center;
+          menu-model: menu {
+            section {
+              item {
+                label: _("Flat");
+                action: "app.set_equalizer_preset";
+                target: "flat";
+              }
+            }
+            section {
+              item {
+                label: _("Vocal Clarity");
+                action: "app.set_equalizer_preset";
+                target: "clarity";
+              }
+              item {
+                label: _("Smooth Jazz");
+                action: "app.set_equalizer_preset";
+                target: "jazz";
+              }
+              item {
+                label: _("Rock");
+                action: "app.set_equalizer_preset";
+                target: "rock";
+              }
+              item {
+                label: _("Classic");
+                action: "app.set_equalizer_preset";
+                target: "classic";
+              }
+              item {
+                label: _("Acoustic");
+                action: "app.set_equalizer_preset";
+                target: "acoustic";
+              }
+            }
+          };
+        }
+
+        Gtk.Box container {
+          orientation: horizontal;
+          halign: center;
+          vexpand: true;
+        }
+      };
+    };
+  };
+  };
+}

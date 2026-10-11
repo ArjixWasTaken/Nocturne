@@ -1,0 +1,61 @@
+pub mod album;
+pub mod artist;
+pub mod containers;
+pub mod lyrics;
+pub mod pages;
+pub mod playing;
+pub mod playlist;
+pub mod song;
+
+use gtk::prelude::*;
+
+/// Register every template type before any `.ui` that references it is built.
+pub fn ensure_types() {
+    album::AlbumButton::ensure_type();
+    album::AlbumPage::ensure_type();
+    album::AlbumRow::ensure_type();
+    artist::ArtistButton::ensure_type();
+    artist::ArtistPage::ensure_type();
+    artist::ArtistRow::ensure_type();
+    containers::Carousel::ensure_type();
+    containers::DownloadRow::ensure_type();
+    containers::DownloadsQueueButton::ensure_type();
+    containers::PageDialog::ensure_type();
+    containers::Wrapbox::ensure_type();
+    lyrics::LyricsDialog::ensure_type();
+    lyrics::LyricEditRow::ensure_type();
+    pages::AlbumsPage::ensure_type();
+    pages::AlbumsAllPage::ensure_type();
+    pages::ArtistsPage::ensure_type();
+    pages::HomePage::ensure_type();
+    pages::LoginDialog::ensure_type();
+    pages::PlaybackPage::ensure_type();
+    pages::PlaylistsPage::ensure_type();
+    pages::RadiosPage::ensure_type();
+    pages::SetupPage::ensure_type();
+    pages::SongsAllPage::ensure_type();
+    pages::StarredPage::ensure_type();
+    pages::WelcomePage::ensure_type();
+    playing::PlayingControlPage::ensure_type();
+    playing::PlayingCoverArt::ensure_type();
+    playing::EqualizerPage::ensure_type();
+    playing::PlayingFooter::ensure_type();
+    playing::PlayingLyricsPage::ensure_type();
+    playing::PlaybackModeButton::ensure_type();
+    playing::PopoutWindow::ensure_type();
+    playing::PlayingQueuePage::ensure_type();
+    playing::VolumeButton::ensure_type();
+    playlist::PlaylistButton::ensure_type();
+    playlist::PlaylistDialog::ensure_type();
+    playlist::PlaylistPage::ensure_type();
+    playlist::PlaylistRow::ensure_type();
+    playlist::PlaylistSelectorRow::ensure_type();
+    song::SongButton::ensure_type();
+    song::SongDetailsDialog::ensure_type();
+    song::SongQueue::ensure_type();
+    song::SongRow::ensure_type();
+    song::SongSmallRow::ensure_type();
+    crate::preferences::PreferencesDialog::ensure_type();
+    crate::window::Window::ensure_type();
+    playing::Spectrum::ensure_type();
+}

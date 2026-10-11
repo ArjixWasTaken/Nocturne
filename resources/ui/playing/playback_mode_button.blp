@@ -1,0 +1,12 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $NocturnePlaybackModeButton: Adw.Bin {
+  child: Gtk.MenuButton button {
+  icon-name: "media-playlist-consecutive-symbolic";
+  tooltip-text: _("Consecutive");
+  popover: Gtk.Popover {
+    child: Gtk.Box container {};
+  };
+  };
+}

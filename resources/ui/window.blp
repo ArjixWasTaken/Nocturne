@@ -1,0 +1,296 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $NocturneWindow: Adw.ApplicationWindow {
+  title: "Nocturne";
+  width-request: 360;
+  height-request: 560;
+  close-request => $close_request();
+  Adw.Breakpoint {
+    condition ("max-width: 840sp")
+    apply => $big_breakpoint_toggled();
+    unapply => $big_breakpoint_toggled();
+  }
+  Adw.Breakpoint breakpoint_el {
+    condition ("max-width: 620sp")
+    setters {
+      main_split_view.collapsed: true;
+      main_split_view.show-content: true;
+      sheet_split_view.collapsed: true;
+      sheet_header.title-widget: null;
+      sheet_header.show-title: false;
+      sheet_switch_bar.reveal: true;
+      main_bottom_sheet.full-width: true;
+    }
+  }
+
+  content: Adw.ToastOverlay toast_overlay {
+    Gtk.Stack main_stack {
+      transition-type: crossfade;
+      Gtk.StackPage {
+        name: "loading";
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {
+            show-title: false;
+          }
+          content: Gtk.Box {
+            orientation: vertical;
+            halign: center;
+            valign: center;
+            spacing: 10;
+            styles [
+              "p10"
+            ]
+            Adw.Spinner {
+              width-request: 240;
+              height-request: 240;
+            }
+            Gtk.Label loading_label_el {
+              wrap: true;
+              wrap-mode: word_char;
+            }
+          };
+        };
+      }
+      Gtk.StackPage {
+        name: "welcome";
+        child: $NocturneWelcomePage welcome_page {};
+      }
+      Gtk.StackPage {
+        name: "setup";
+        child: $NocturneSetupPage setup_page {};
+      }
+      Gtk.StackPage {
+        name: "playback";
+        child: $NocturnePlaybackPage {};
+      }
+      Gtk.StackPage {
+        name: "content";
+        child: Adw.BottomSheet main_bottom_sheet {
+          name: "main-bottom-sheet";
+          full-width: false;
+          show-drag-handle: false;
+          reveal-bottom-bar: false;
+          accessible-role: navigation;
+          Gtk.DropTarget {
+            formats: "GFile";
+            drop => $on_drop();
+            actions: copy;
+          }
+
+          content: Adw.NavigationSplitView main_split_view {
+            max-sidebar-width: 240;
+            show-content: true;
+            sidebar: Adw.NavigationPage {
+              title:  "Nocturne";
+              child: Adw.ToolbarView {
+                [top]
+                Adw.HeaderBar sidebar_headerbar {
+                  [start]
+                  Gtk.Button {
+                    icon-name: "media-playlist-shuffle-symbolic";
+                    tooltip-text: _("Play Random Queue");
+                    action-name: "app.play_random_queue";
+                  }
+
+                  [end]
+                  Gtk.MenuButton {
+                    primary: true;
+                    icon-name: "open-menu-symbolic";
+                    tooltip-text: _("Menu");
+                    menu-model: primary_menu;
+                  }
+
+                  [end]
+                  $NocturneDownloadsQueueButton downloads_button_el {}
+                }
+                content: Adw.Bin sidebar_bin {};
+              };
+            };
+            content: Adw.NavigationPage {
+              child: Adw.OverlaySplitView player_sidebar_splitview {
+                max-sidebar-width: 480;
+                min-sidebar-width: 360;
+                show-sidebar: false;
+                sidebar-position: end;
+                content: Adw.NavigationView main_navigationview {
+                  styles [
+                    "main-navigationview"
+                  ]
+                  $NocturneHomePage {}
+                  $NocturneArtistsPage {}
+                  $NocturneStarredPage {
+                    tag: "artists-starred";
+                    title:_("Favorite Artists");
+                  }
+                  $NocturnePlaylistsPage {}
+                  $NocturneSongsAllPage {}
+                  $NocturneStarredPage {
+                    tag: "songs-starred";
+                    title:_("Favorite Songs");
+                  }
+                  $NocturneAlbumsAllPage {}
+                  $NocturneRadiosPage {}
+                  $NocturneAlbumsPage {
+                    tag: "albums-random";
+                    title: _("Random Albums");
+                  }
+                  $NocturneAlbumsPage {
+                    tag: "albums-starred";
+                    title: _("Favorite Albums");
+                  }
+                  $NocturneAlbumsPage {
+                    tag: "albums-newest";
+                    title: _("Newest Albums");
+                  }
+                  $NocturneAlbumsPage {
+                    tag: "albums-recent";
+                    title: _("Recent Albums");
+                  }
+                  $NocturneAlbumsPage {
+                    tag: "albums-frequent";
+                    title: _("Frequent Albums");
+                  }
+                };
+                sidebar: Adw.ToolbarView {
+                  styles [
+                    "main_sidebar"
+                  ]
+                  extend-content-to-top-edge: true;
+                  [top]
+                  Adw.HeaderBar {}
+
+                  [bottom]
+                  Adw.ViewSwitcherBar {
+                    stack: sidebar_stack;
+                    reveal: true;
+                  }
+
+                  content: Adw.ViewStack sidebar_stack {
+                    enable-transitions: true;
+                    vhomogeneous: true;
+                    hhomogeneous: true;
+                    Adw.ViewStackPage {
+                      name: "player";
+                      title: _("Player");
+                      icon-name: "music-note-symbolic";
+                      child: $NocturnePlayingControlPage sidebar_playing_page {};
+                    }
+                    Adw.ViewStackPage {
+                      name: "queue";
+                      title: _("Queue");
+                      icon-name: "playlist-symbolic";
+                      child: $NocturnePlayingQueuePage sidebar_queue_page {
+                        styles [
+                          "queue_page_padding_top"
+                        ]
+                      };
+                    }
+                    Adw.ViewStackPage {
+                      name: "lyrics";
+                      title: _("Lyrics");
+                      icon-name: "text-justify-center-symbolic";
+                      child: $NocturnePlayingLyricsPage sidebar_lyrics_page {};
+                    }
+                    Adw.ViewStackPage {
+                      name: "equalizer";
+                      title: _("Equalizer");
+                      icon-name: "sound-symbolic";
+                      child: $NocturneEqualizerPage {};
+                    }
+                  };
+                };
+              };
+            };
+          };
+
+          bottom-bar: $NocturnePlayingFooter footer {};
+
+          sheet: Adw.NavigationSplitView sheet_split_view {
+            sidebar-width-fraction: 0.5;
+            max-sidebar-width: 420;
+
+            sidebar: $NocturnePlayingControlPage playing_page {};
+            content: Adw.NavigationPage {
+              title: _("Song Details");
+              child: Adw.ToolbarView {
+                [top]
+                Adw.HeaderBar sheet_header {
+                  show-end-title-buttons: false;
+                  show-start-title-buttons: false;
+                  title-widget: Adw.ViewSwitcher {
+                    stack: sheet_stack;
+                    policy: wide;
+                  };
+                }
+                [bottom]
+                Adw.ViewSwitcherBar sheet_switch_bar {
+                  stack: sheet_stack;
+                }
+
+                Adw.ViewStack sheet_stack {
+                  enable-transitions: true;
+                  vhomogeneous: true;
+                  hhomogeneous: true;
+                  Adw.ViewStackPage {
+                    name: "queue";
+                    title: _("Queue");
+                    icon-name: "playlist-symbolic";
+                    child: $NocturnePlayingQueuePage queue_page {};
+                  }
+                  Adw.ViewStackPage {
+                    name: "lyrics";
+                    title: _("Lyrics");
+                    icon-name: "text-justify-center-symbolic";
+                    child: $NocturnePlayingLyricsPage lyrics_page {};
+                  }
+                  Adw.ViewStackPage {
+                    name: "equalizer";
+                    title: _("Equalizer");
+                    icon-name: "sound-symbolic";
+                    child: $NocturneEqualizerPage {};
+                  }
+                }
+              };
+            };
+          };
+        };
+      }
+    }
+  };
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: _("Preferences");
+      action: "app.preferences";
+    }
+
+    item {
+      label: _("Open Pop-Out Window");
+      action: "app.open_popout_window";
+    }
+
+    item {
+      label: _("Toggle Fullscreen");
+      action: "app.toggle_fullscreen";
+    }
+
+    item {
+      label: _("See Last Nocturne Playback");
+      action: "app.launch_playback";
+    }
+
+    item {
+      label: _("Keyboard Shortcuts");
+      action: "app.shortcuts";
+    }
+
+    item {
+      label: _("About Nocturne");
+      action: "app.about";
+    }
+  }
+}

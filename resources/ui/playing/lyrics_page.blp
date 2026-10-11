@@ -1,0 +1,192 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $NocturnePlayingLyricsPage: Adw.Bin {
+  child: Gtk.Stack stack {
+  transition-type: crossfade;
+
+  Gtk.StackPage {
+    name: "loading";
+    child: Adw.Spinner {};
+  }
+
+  Gtk.StackPage {
+    name: "plain";
+    child: Gtk.Overlay {
+      [overlay]
+      Gtk.Button {
+        styles [
+          "circular",
+          "accent"
+        ]
+        margin-bottom: 10;
+        margin-end: 10;
+        valign: end;
+        halign: end;
+        tooltip-text: _("Go Back");
+        icon-name: "step-back-symbolic";
+        clicked => $go_to_main();
+      }
+      child: Gtk.ScrolledWindow {
+        propagate-natural-width: false;
+        propagate-natural-height: true;
+        max-content-width: 500;
+        max-content-height: 400;
+        child: Adw.Clamp {
+          maximum-size: 800;
+          tightening-threshold: 600;
+          child: Gtk.Label plain_label_el {
+            wrap: true;
+            wrap-mode: word_char;
+            justify: center;
+            halign: center;
+            valign: center;
+            styles [
+              "title-4",
+              "p10",
+              "document"
+            ]
+          };
+        };
+      };
+    };
+  }
+
+  Gtk.StackPage {
+    name: "lrc";
+    child: Gtk.Overlay {
+      [overlay]
+      Gtk.MenuButton {
+        styles [
+          "circular",
+          "accent"
+        ]
+        margin-bottom: 10;
+        margin-end: 10;
+        valign: end;
+        halign: end;
+        tooltip-text: _("Lyrics Options");
+        icon-name: "view-more-symbolic";
+        popover: Gtk.Popover lrc_menu_popover {
+          child: Adw.Spinner {};
+        };
+      }
+
+      [overlay]
+      Gtk.Button {
+        styles [
+          "circular",
+          "accent"
+        ]
+        visible: false;
+        margin-bottom: 10;
+        margin-end: 10;
+        valign: end;
+        halign: end;
+        tooltip-text: _("Go Back");
+        icon-name: "step-back-symbolic";
+        clicked => $go_to_main();
+      }
+      child: Gtk.ScrolledWindow scrolledwindow {
+        propagate-natural-width: true;
+        propagate-natural-height: true;
+        max-content-width: 500;
+        max-content-height: 400;
+        child: Adw.Clamp {
+          maximum-size: 800;
+          tightening-threshold: 600;
+          child: Gtk.ListBox lrc_list_el {
+            styles [
+              "lrc_list"
+            ]
+            selection-mode: single;
+            row-selected => $on_lrc_selection();
+          };
+        };
+      };
+    };
+  }
+
+  Gtk.StackPage {
+    name: "not-found";
+    child: Adw.StatusPage {
+      title: _("No Lyrics Found");
+      icon-name: "sad-computer-symbolic";
+      child: Gtk.Button {
+        tooltip-text: _("Go Back");
+        halign: center;
+        child: Adw.ButtonContent {
+          icon-name: "step-back-symbolic";
+          label: _("Go Back");
+        };
+        clicked => $go_to_main();
+      };
+    };
+  }
+
+  Gtk.StackPage {
+    name: "instrumental";
+    child: Adw.StatusPage {
+      title: _("Instrumental");
+      icon-name: "music-note-symbolic";
+      child: Gtk.Button {
+        tooltip-text: _("Go Back");
+        halign: center;
+        child: Adw.ButtonContent {
+          icon-name: "step-back-symbolic";
+          label: _("Go Back");
+        };
+        clicked => $go_to_main();
+      };
+    };
+  }
+
+  Gtk.StackPage {
+    name: "radio";
+    child: Adw.StatusPage {
+      title: _("Radio");
+      icon-name: "sound-symbolic";
+    };
+  }
+
+  Gtk.StackPage {
+    name: "not-found-locally";
+    child: Adw.StatusPage {
+      title: _("Not Downloaded");
+      icon-name: "folder-download-symbolic";
+      description: _("The lyrics for this song have not been downloaded yet, they might be available for download");
+      child: Gtk.Box {
+        orientation: vertical;
+        spacing: 10;
+        halign: center;
+
+        Gtk.Button {
+          styles [
+            "accent"
+          ]
+          halign: center;
+          tooltip-text: _("Download");
+          child: Adw.ButtonContent {
+            icon-name: "folder-download-symbolic";
+            label: _("Download");
+          };
+          clicked => $lyric_download_requested();
+        }
+
+        Gtk.Button {
+          styles [
+            "flat"
+          ]
+          halign: center;
+          tooltip-text: _("Load Lyrics File");
+          child: Adw.ButtonContent {
+            icon-name: "paper-symbolic";
+            label: _("Load Lyrics File");
+          };
+          clicked => $lyric_load_requested();
+        }
+      };
+    };
+  }
+  };
+}

@@ -1,0 +1,41 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $NocturnePlayingQueuePage: Adw.Bin {
+  child: Gtk.ScrolledWindow scrolled {
+  propagate-natural-width: true;
+  propagate-natural-height: true;
+  max-content-width: 500;
+  max-content-height: 400;
+  child: Adw.Clamp {
+    maximum-size: 800;
+    tightening-threshold: 600;
+    child: Gtk.Box {
+      orientation: vertical;
+      spacing: 5;
+
+      Adw.SwitchRow autoplay_row_el {
+        [prefix]
+        Adw.Spinner autoplay_spinner_el {
+          tooltip-text: _("Generating Next Queue");
+          visible: bind template.root as <Adw.ApplicationWindow> .application as <$NocturneApplication> .integration as <$NocturneIntegrationBase> .current-state as <$NocturneModelCurrentState> .generatingQueue;
+        }
+
+        activatable: false;
+        title: _("Autoplay");
+        subtitle: _("Generate a new queue when the current one ends");
+      }
+
+      Adw.Bin list_bin_el {
+        child: Gtk.ListBox song_list_el {
+          selection-mode: none;
+          styles [
+            "boxed-list-separate",
+            "p10"
+          ]
+        };
+      }
+    };
+  };
+  };
+}
