@@ -107,7 +107,7 @@ impl ArtistPage {
             wrap_box_append(&*imp.context_wrap_el, &b);
         }
         let list = imp.top_songs_wrapbox.list();
-        list.set_property_from_str("justify", "fill");
+        context::set_enum(&list, "justify", "fill");
         list.set_property("justify-last-line", true);
         list.set_property("child-spacing", 5i32);
         list.set_property("line-spacing", 5i32);

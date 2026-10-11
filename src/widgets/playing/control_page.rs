@@ -102,7 +102,7 @@ impl PlayingControlPage {
     pub fn header_bar(&self) -> adw::HeaderBar {
         self.imp().header_bar.get()
     }
-    pub fn clamp(&self) -> adw::Clamp {
+    pub fn clamp_el(&self) -> adw::Clamp {
         self.imp().clamp.get()
     }
     pub fn cover_art(&self) -> super::PlayingCoverArt {

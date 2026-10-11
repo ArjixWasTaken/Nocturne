@@ -424,3 +424,14 @@ pub fn play_from_list_target(song: &str, songs: &[String], origin: &str) -> glib
     d.insert("originId", origin);
     d.end()
 }
+
+/// Set an enum property by nick (for widgets newer than the bindings, e.g. `Adw.WrapBox:justify`).
+pub fn set_enum(obj: &impl IsA<glib::Object>, prop: &str, nick: &str) {
+    let v = obj
+        .find_property(prop)
+        .and_then(|p| glib::EnumClass::with_type(p.value_type()))
+        .and_then(|c| c.to_value_by_nick(nick));
+    if let Some(v) = v {
+        obj.set_property_from_value(prop, &v);
+    }
+}

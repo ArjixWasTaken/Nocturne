@@ -1,6 +1,6 @@
 //! `NocturneArtistsPage` (pages/artists.blp): searchable artist list/grid.
 use super::{Kind, ListParts, Lister, bind_view_mode, list_page, on_short_content};
-use adw::{prelude::*, subclass::prelude::*};
+use adw::subclass::prelude::*;
 use gtk::{CompositeTemplate, glib};
 use std::rc::Rc;
 

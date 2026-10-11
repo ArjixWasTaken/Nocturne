@@ -291,6 +291,18 @@ impl Window {
         }
         self.song_changed(&state.songId());
 
+        self.setup_sidebar_playlists();
+        let w = self.downgrade();
+        spawn_local(async move {
+            if let Some(w) = w.upgrade() {
+                w.notify_playback().await;
+            }
+        });
+    }
+
+    /// Fetch the first playlists again and rebuild the sidebar.
+    pub fn setup_sidebar_playlists(&self) {
+        let Some(integ) = integration::current() else { return };
         let w = self.downgrade();
         spawn_local(async move {
             let mut ids = integ.playlists().await;
@@ -298,7 +310,6 @@ impl Window {
             let Some(w) = w.upgrade() else { return };
             w.imp().sidebar_playlists.replace(ids);
             w.setup_sidebar();
-            w.notify_playback().await;
         });
     }
 

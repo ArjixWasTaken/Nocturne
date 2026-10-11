@@ -59,7 +59,7 @@ mod imp {
             s.connect_changed(Some("use-dynamic-accent"), glib::clone!(#[weak] obj, move |s, k| obj.set_css_class("dynamic-accent", s.boolean(k))));
             obj.set_css_class("dynamic-accent", s.boolean("use-dynamic-accent"));
 
-            let clamp = page.clamp();
+            let clamp = page.clamp_el();
             page.cover_art().view_stack().connect_visible_child_name_notify(move |vs| {
                 clamp.set_maximum_size(if vs.visible_child_name().as_deref() == Some("video") { 1920 } else { 720 });
             });

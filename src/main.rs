@@ -98,7 +98,8 @@ fn main() -> glib::ExitCode {
     let cli = Cli::parse();
 
     // Translations for Blueprint strings (and future gettext! calls).
-    let _ = gettextrs::setlocale(gettextrs::LocaleCategory::LcAll, "");
+    // SAFETY: called once at startup before any other threads exist.
+    let _ = unsafe { gettextrs::setlocale(gettextrs::LocaleCategory::LcAll, "") };
     let _ = gettextrs::bindtextdomain("nocturne", option_env!("NOCTURNE_LOCALEDIR").unwrap_or("/usr/share/locale"));
     let _ = gettextrs::bind_textdomain_codeset("nocturne", "UTF-8");
     let _ = gettextrs::textdomain("nocturne");
