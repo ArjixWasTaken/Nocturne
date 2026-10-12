@@ -22,7 +22,7 @@ mod imp {
         pub player: RefCell<Option<Player>>,
         pub window: RefCell<Option<Window>>,
         /// Dynamic accent/background CSS generated from the cover art.
-        pub css_provider: gtk::CssProvider,
+        pub css_provider: std::cell::OnceCell<gtk::CssProvider>,
         /// Files passed on the command line before login finished.
         pub pending_files: RefCell<Vec<gio::File>>,
         pub popout: RefCell<Option<crate::widgets::playing::PopoutWindow>>,
@@ -45,7 +45,7 @@ mod imp {
             let obj = self.obj();
             crate::widgets::ensure_types();
             if let Some(display) = gdk::Display::default() {
-                gtk::style_context_add_provider_for_display(&display, &self.css_provider, gtk::STYLE_PROVIDER_PRIORITY_APPLICATION);
+                gtk::style_context_add_provider_for_display(&display, self.css_provider.get_or_init(gtk::CssProvider::new), gtk::STYLE_PROVIDER_PRIORITY_APPLICATION);
                 gtk::IconTheme::for_display(&display).add_resource_path("/dev/arjix/Nocturne/icons");
             }
             crate::actions::register(&obj);
@@ -137,7 +137,7 @@ impl Application {
     }
 
     pub fn css_provider(&self) -> gtk::CssProvider {
-        self.imp().css_provider.clone()
+        self.imp().css_provider.get_or_init(gtk::CssProvider::new).clone()
     }
 
     /// Log back into the integration stored in settings, or show the welcome page.

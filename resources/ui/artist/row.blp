@@ -12,10 +12,10 @@ template $NocturneArtistRow: Adw.ActionRow {
 
   Gtk.GestureClick {
     button: 3;
-    released => $show_popover();
+    released => $show_popover() swapped;
   }
   Gtk.GestureLongPress {
-    pressed => $show_popover();
+    pressed => $show_popover() swapped;
   }
 
   [prefix]
@@ -36,7 +36,7 @@ template $NocturneArtistRow: Adw.ActionRow {
     ]
     icon-name: "view-more-symbolic";
     valign: center;
-    notify::active => $on_context_button_active();
+    notify::active => $on_context_button_active() swapped;
     popover: Gtk.Popover {
       child: Adw.Spinner {};
     };

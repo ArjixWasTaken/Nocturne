@@ -37,8 +37,8 @@ template $NocturneLoginDialog: Adw.Dialog {
               subtitle: _("Not Running");
               tooltip-text: _("Restart Instance");
               activatable: true;
-              activated => $server_restart_requested();
-              notify::subtitle => $update_login_sensitivity();
+              activated => $server_restart_requested() swapped;
+              notify::subtitle => $update_login_sensitivity() swapped;
 
               [prefix]
               Gtk.Image {
@@ -59,7 +59,7 @@ template $NocturneLoginDialog: Adw.Dialog {
 
             Adw.EntryRow url_el {
               title: _("Url");
-              changed => $update_login_sensitivity();
+              changed => $update_login_sensitivity() swapped;
               [suffix]
               Gtk.MenuButton url_options_el {
                 styles [
@@ -81,9 +81,9 @@ template $NocturneLoginDialog: Adw.Dialog {
 
             Adw.ActionRow directory_el {
               title: _("Library Directory");
-              notify::subtitle => $library_changed();
-              notify::subtitle => $update_login_sensitivity();
-              activated => $open_local_directory();
+              notify::subtitle => $library_changed() swapped;
+              notify::subtitle => $update_login_sensitivity() swapped;
+              activated => $open_local_directory() swapped;
               activatable: true;
               [prefix]
               Gtk.Image {
@@ -94,13 +94,13 @@ template $NocturneLoginDialog: Adw.Dialog {
 
             Adw.EntryRow user_el {
               title: _("Username");
-              changed => $update_login_sensitivity();
+              changed => $update_login_sensitivity() swapped;
             }
 
             Adw.PasswordEntryRow password_el {
               title: _("Password");
-              entry-activated => $login_button_clicked();
-              changed => $update_login_sensitivity();
+              entry-activated => $login_button_clicked() swapped;
+              changed => $update_login_sensitivity() swapped;
             }
           }
 
@@ -111,7 +111,7 @@ template $NocturneLoginDialog: Adw.Dialog {
             ]
             label: _("Login");
             tooltip-text: _("Login");
-            clicked => $login_button_clicked();
+            clicked => $login_button_clicked() swapped;
             halign: center;
           }
 
@@ -121,7 +121,7 @@ template $NocturneLoginDialog: Adw.Dialog {
             ]
             label: _("Use Quick Connect");
             tooltip-text: _("Use Quick Connect");
-            clicked => $quick_connect_button_clicked();
+            clicked => $quick_connect_button_clicked() swapped;
             halign: center;
           }
         };

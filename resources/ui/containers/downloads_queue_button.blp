@@ -4,7 +4,7 @@ using Adw 1;
 template $NocturneDownloadsQueueButton: Adw.Bin {
   visible: false;
   child: Gtk.MenuButton menu_button {
-    notify::active => $button_activated();
+    notify::active => $button_activated() swapped;
     icon-name: "folder-download-symbolic";
     popover: Gtk.Popover {
       child: Adw.PreferencesGroup {
@@ -18,7 +18,7 @@ template $NocturneDownloadsQueueButton: Adw.Bin {
           valign: center;
           icon-name: "cross-large-symbolic";
           tooltip-text: _("Clear Done Downloads");
-          clicked => $clear_done_downloads();
+          clicked => $clear_done_downloads() swapped;
         };
         Gtk.ScrolledWindow {
           propagate-natural-height: true;

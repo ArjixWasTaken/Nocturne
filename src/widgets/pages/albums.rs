@@ -141,7 +141,7 @@ impl AlbumsPage {
     }
 
     #[template_callback]
-    fn scroll_edge_reached(&self, _sw: &gtk::ScrolledWindow, pos: gtk::PositionType) {
+    fn scroll_edge_reached(&self, pos: gtk::PositionType, _sw: &gtk::ScrolledWindow) {
         if pos == gtk::PositionType::Bottom && self.imp().end_stack.visible_child_name().as_deref() == Some("loading") {
             self.load_albums();
         }

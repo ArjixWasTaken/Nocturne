@@ -266,7 +266,7 @@ impl PlayingLyricsPage {
     }
 
     #[template_callback]
-    fn on_lrc_selection(&self, _list: &gtk::ListBox, row: Option<gtk::ListBoxRow>) {
+    fn on_lrc_selection(&self, row: Option<gtk::ListBoxRow>, _list: &gtk::ListBox) {
         let imp = self.imp();
         let lines = imp.lines.borrow();
         if let Some(prev) = imp.last_best.get().and_then(|i| lines.get(i)) {

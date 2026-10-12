@@ -562,7 +562,7 @@ impl Window {
     }
 
     #[template_callback]
-    fn on_drop(&self, _target: &gtk::DropTarget, value: glib::BoxedValue) -> bool {
+    fn on_drop(&self, value: glib::BoxedValue, _target: &gtk::DropTarget) -> bool {
         match value.get::<gio::File>() {
             Ok(file) => {
                 Application::get().open(&[file], "");

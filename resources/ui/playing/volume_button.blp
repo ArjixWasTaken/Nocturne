@@ -14,7 +14,7 @@ template $NocturneVolumeButton: Adw.Bin {
         ]
         icon-name: "speaker-0-symbolic";
         tooltip-text: _("Mute");
-        clicked => $mute_volume();
+        clicked => $mute_volume() swapped;
       }
 
       Gtk.Scale {
@@ -33,7 +33,7 @@ template $NocturneVolumeButton: Adw.Bin {
         ]
         icon-name: "speaker-3-symbolic";
         tooltip-text: _("Full Volume");
-        clicked => $full_volume();
+        clicked => $full_volume() swapped;
       }
     };
   };

@@ -10,7 +10,7 @@ template $NocturnePlaylistDialog: Adw.Dialog {
       title-widget: Gtk.SearchEntry search_entry_el {
         placeholder-text: _("Search (or create new playlist)");
         hexpand: true;
-        search-changed => $search_changed();
+        search-changed => $search_changed() swapped;
       };
     }
     content: Gtk.ScrolledWindow {

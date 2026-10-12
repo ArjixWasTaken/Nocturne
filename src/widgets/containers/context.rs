@@ -249,10 +249,13 @@ pub fn popup(parent: &impl IsA<gtk::Widget>, child: &impl IsA<gtk::Widget>, x: f
 
 /// (gesture, x, y) from the args of `GestureClick::released` / `GestureLongPress::pressed`.
 pub fn gesture_point(args: &[glib::Value]) -> (Option<gtk::Widget>, f64, f64) {
-    let n = args.len();
-    let x = args.get(n.wrapping_sub(2)).and_then(|v| v.get::<f64>().ok()).unwrap_or(0.0);
-    let y = args.get(n.wrapping_sub(1)).and_then(|v| v.get::<f64>().ok()).unwrap_or(0.0);
-    let w = args.first().and_then(|v| v.get::<gtk::EventController>().ok()).and_then(|g| g.widget());
+    // Swapped handlers receive the signal args first and the emitting gesture last.
+    let floats: Vec<f64> = args.iter().filter_map(|v| v.get::<f64>().ok()).collect();
+    let (x, y) = match floats.as_slice() {
+        [.., x, y] => (*x, *y),
+        _ => (0.0, 0.0),
+    };
+    let w = args.iter().find_map(|v| v.get::<gtk::EventController>().ok()).and_then(|g| g.widget());
     (w, x, y)
 }
 

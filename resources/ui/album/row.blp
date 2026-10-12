@@ -4,10 +4,10 @@ using Adw 1;
 template $NocturneAlbumRow: Adw.ActionRow {
   Gtk.GestureClick {
     button: 3;
-    released => $show_popover();
+    released => $show_popover() swapped;
   }
   Gtk.GestureLongPress {
-    pressed => $show_popover();
+    pressed => $show_popover() swapped;
   }
   action-name: "app.show_album";
   action-target: bind $format_action_target(template.model as <$NocturneModelAlbum> .id, 's');
@@ -45,7 +45,7 @@ template $NocturneAlbumRow: Adw.ActionRow {
     ]
     icon-name: "view-more-symbolic";
     valign: center;
-    notify::active => $on_context_button_active();
+    notify::active => $on_context_button_active() swapped;
     popover: Gtk.Popover {
       child: Adw.Spinner {};
     };

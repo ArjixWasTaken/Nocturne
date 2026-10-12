@@ -122,7 +122,7 @@ impl PopoutWindow {
     }
 
     #[template_callback]
-    fn fullscreen_toggled(&self, _: &Self, _: glib::ParamSpec) {
+    fn fullscreen_toggled(&self, _: glib::ParamSpec, _: &Self) {
         let fs = self.is_fullscreen();
         if let Some(b) = self.imp().fullscreen_btn.borrow().as_ref() {
             b.set_icon_name(if fs { "view-unfullscreen-symbolic" } else { "view-fullscreen-symbolic" });

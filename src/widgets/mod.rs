@@ -11,6 +11,14 @@ use gtk::prelude::*;
 
 /// Register every template type before any `.ui` that references it is built.
 pub fn ensure_types() {
+    crate::models::Song::ensure_type();
+    crate::models::Album::ensure_type();
+    crate::models::Artist::ensure_type();
+    crate::models::Playlist::ensure_type();
+    crate::models::SongDownload::ensure_type();
+    crate::models::CurrentState::ensure_type();
+    crate::integration::Integration::ensure_type();
+    crate::application::Application::ensure_type();
     album::AlbumButton::ensure_type();
     album::AlbumPage::ensure_type();
     album::AlbumRow::ensure_type();

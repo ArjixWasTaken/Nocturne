@@ -29,12 +29,12 @@ template $NocturnePreferencesDialog: Adw.PreferencesDialog {
       Adw.ComboRow default_page_el {
         title: _("Default Page on Login");
         model: Gtk.StringList {};
-        notify::selected => $default_page_changed();
+        notify::selected => $default_page_changed() swapped;
       }
       Adw.ComboRow bitrate_el {
         title: _("Maximum Bitrate");
         model: Gtk.StringList {};
-        notify:: selected => $max_bitrate_changed();
+        notify:: selected => $max_bitrate_changed() swapped;
       }
     }
     Adw.PreferencesGroup gnome_search_group_el {
@@ -80,7 +80,7 @@ template $NocturnePreferencesDialog: Adw.PreferencesDialog {
               label: _("Link");
               tooltip-text: _("Link");
               valign: center;
-              clicked => $listenbrainz_link_requested();
+              clicked => $listenbrainz_link_requested() swapped;
             };
           }
           Gtk.StackPage {
@@ -89,7 +89,7 @@ template $NocturnePreferencesDialog: Adw.PreferencesDialog {
               label: _("Unlink");
               tooltip-text: _("Unlink");
               valign: center;
-              clicked => $listenbrainz_unlink_requested();
+              clicked => $listenbrainz_unlink_requested() swapped;
               styles [
                 "destructive-action"
               ]
@@ -121,7 +121,7 @@ template $NocturnePreferencesDialog: Adw.PreferencesDialog {
       Adw.ComboRow library_combo_el {
         title: _("Music Library");
         subtitle: _("The music library that will be fetched");
-        notify::selected => $library_combo_changed();
+        notify::selected => $library_combo_changed() swapped;
       }
       Adw.ExpanderRow library_expander_el {
         title: _("Music Libraries");
@@ -132,7 +132,7 @@ template $NocturnePreferencesDialog: Adw.PreferencesDialog {
         styles [
           "destructive-action"
         ]
-        activated => $delete_image_cache_requested();
+        activated => $delete_image_cache_requested() swapped;
       }
       Adw.ButtonRow {
         title: _("Logout");
@@ -283,7 +283,7 @@ template $NocturnePreferencesDialog: Adw.PreferencesDialog {
         [suffix]
         Adw.ToggleGroup home_mode_el {
           valign: center;
-          notify::active-name => $home_mode_changed();
+          notify::active-name => $home_mode_changed() swapped;
           Adw.Toggle {
             tooltip: _("Off");
             label: _("Off");
@@ -444,7 +444,7 @@ template $NocturnePreferencesDialog: Adw.PreferencesDialog {
             title: _("Visualizer Color");
             with-alpha: false;
           };
-          notify::rgba => $visualizer_manual_color_changed();
+          notify::rgba => $visualizer_manual_color_changed() swapped;
         }
       }
 

@@ -278,7 +278,7 @@ impl PreferencesDialog {
     }
 
     #[template_callback]
-    fn library_combo_changed(&self, combo: &adw::ComboRow) {
+    fn library_combo_changed(&self, _pspec: glib::ParamSpec, combo: &adw::ComboRow) {
         if !combo.is_mapped() {
             return;
         }
@@ -291,7 +291,7 @@ impl PreferencesDialog {
     }
 
     #[template_callback]
-    fn default_page_changed(&self, combo: &adw::ComboRow) {
+    fn default_page_changed(&self, _pspec: glib::ParamSpec, combo: &adw::ComboRow) {
         let tag = self.imp().default_pages.borrow().get(combo.selected() as usize).copied().unwrap_or("home");
         let _ = settings().set_string("default-page-tag", tag);
     }
@@ -303,7 +303,7 @@ impl PreferencesDialog {
     }
 
     #[template_callback]
-    fn visualizer_manual_color_changed(&self, btn: &gtk::ColorDialogButton) {
+    fn visualizer_manual_color_changed(&self, _pspec: glib::ParamSpec, btn: &gtk::ColorDialogButton) {
         let c = btn.rgba();
         let _ = settings().set_string("visualizer-manual-color", &format!("{:.3},{:.3},{:.3}", c.red(), c.green(), c.blue()));
     }
@@ -359,7 +359,7 @@ impl PreferencesDialog {
     }
 
     #[template_callback]
-    fn home_mode_changed(&self, toggle: &gtk::Widget) {
+    fn home_mode_changed(&self, _pspec: glib::ParamSpec, toggle: &gtk::Widget) {
         if self.root().is_none() {
             return;
         }

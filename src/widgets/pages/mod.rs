@@ -287,7 +287,7 @@ macro_rules! list_page {
                 self.imp().lister.on_search($kind, &self.parts())
             }
             #[template_callback]
-            fn scroll_edge_reached(&self, _sw: &gtk::ScrolledWindow, pos: gtk::PositionType) {
+            fn scroll_edge_reached(&self, pos: gtk::PositionType, _sw: &gtk::ScrolledWindow) {
                 self.imp().lister.edge_reached($kind, &self.parts(), pos)
             }
         }

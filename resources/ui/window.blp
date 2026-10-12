@@ -5,11 +5,11 @@ template $NocturneWindow: Adw.ApplicationWindow {
   title: "Nocturne";
   width-request: 360;
   height-request: 560;
-  close-request => $close_request();
+  close-request => $close_request() swapped;
   Adw.Breakpoint {
     condition ("max-width: 840sp")
-    apply => $big_breakpoint_toggled();
-    unapply => $big_breakpoint_toggled();
+    apply => $big_breakpoint_toggled() swapped;
+    unapply => $big_breakpoint_toggled() swapped;
   }
   Adw.Breakpoint breakpoint_el {
     condition ("max-width: 620sp")
@@ -75,7 +75,7 @@ template $NocturneWindow: Adw.ApplicationWindow {
           accessible-role: navigation;
           Gtk.DropTarget {
             formats: "GFile";
-            drop => $on_drop();
+            drop => $on_drop() swapped;
             actions: copy;
           }
 

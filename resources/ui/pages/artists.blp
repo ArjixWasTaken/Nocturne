@@ -26,7 +26,7 @@ template $NocturneArtistsPage: Adw.NavigationPage {
         hexpand: true;
         key-capture-widget: main_stack;
         placeholder-text: _("Artists");
-        search-changed => $on_search();
+        search-changed => $on_search() swapped;
         accessibility {
           label: _("Search artists");
         }
@@ -44,7 +44,7 @@ template $NocturneArtistsPage: Adw.NavigationPage {
         child: Gtk.ScrolledWindow scrolledwindow {
           propagate-natural-width: true;
           propagate-natural-height: true;
-          edge-reached => $scroll_edge_reached();
+          edge-reached => $scroll_edge_reached() swapped;
 
           child: Adw.Clamp {
             maximum-size: 2000;

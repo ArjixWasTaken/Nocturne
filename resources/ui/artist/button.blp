@@ -4,10 +4,10 @@ using Adw 1;
 template $NocturneArtistButton: Gtk.Button {
   Gtk.GestureClick {
     button: 3;
-    released => $show_popover();
+    released => $show_popover() swapped;
   }
   Gtk.GestureLongPress {
-    pressed => $show_popover();
+    pressed => $show_popover() swapped;
   }
   styles [
     "flat"

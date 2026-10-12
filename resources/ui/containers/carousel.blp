@@ -43,13 +43,13 @@ template $NocturneCarousel: Gtk.Box {
       Gtk.Button pan_start_el {
         tooltip-text: _("Pan to the Left");
         icon-name: "pan-start-symbolic";
-        clicked => $pan_start();
+        clicked => $pan_start() swapped;
       }
 
       Gtk.Button pan_end_el {
         tooltip-text: _("Pan to the Right");
         icon-name: "pan-end-symbolic";
-        clicked => $pan_end();
+        clicked => $pan_end() swapped;
       }
 
     }
@@ -83,11 +83,11 @@ template $NocturneCarousel: Gtk.Box {
       allow-long-swipes: true;
       allow-mouse-drag: true;
       allow-scroll-wheel: false;
-      page-changed => $page_changed();
+      page-changed => $page_changed() swapped;
       overflow: visible;
 
       Gtk.EventControllerScroll {
-        scroll => $on_scroll();
+        scroll => $on_scroll() swapped;
         flags: both_axes;
       }
 

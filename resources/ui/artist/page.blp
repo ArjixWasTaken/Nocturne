@@ -84,7 +84,7 @@ template $NocturneArtistPage: Adw.NavigationPage {
                 }
                 visible: bind $format_to_bool(template.model as <$NocturneModelArtist> .biography);
                 tooltip-text: _("Expand Biography");
-                clicked => $on_biography_clicked();
+                clicked => $on_biography_clicked() swapped;
               }
 
               Gtk.Box rating_container {
@@ -95,7 +95,7 @@ template $NocturneArtistPage: Adw.NavigationPage {
                   name: "1";
                   tooltip-text: _("1 Star");
                   icon-name: bind $format_rating_icon_name(template.model as <$NocturneModelArtist> .userRating, 1);
-                  clicked => $change_rating();
+                  clicked => $change_rating() swapped;
                   styles [
                     "flat"
                   ]
@@ -104,7 +104,7 @@ template $NocturneArtistPage: Adw.NavigationPage {
                   name: "2";
                   tooltip-text: _("2 Stars");
                   icon-name: bind $format_rating_icon_name(template.model as <$NocturneModelArtist> .userRating, 2);
-                  clicked => $change_rating();
+                  clicked => $change_rating() swapped;
                   styles [
                     "flat"
                   ]
@@ -113,7 +113,7 @@ template $NocturneArtistPage: Adw.NavigationPage {
                   name: "3";
                   tooltip-text: _("3 Stars");
                   icon-name: bind $format_rating_icon_name(template.model as <$NocturneModelArtist> .userRating, 3);
-                  clicked => $change_rating();
+                  clicked => $change_rating() swapped;
                   styles [
                     "flat"
                   ]
@@ -122,7 +122,7 @@ template $NocturneArtistPage: Adw.NavigationPage {
                   name: "4";
                   tooltip-text: _("4 Stars");
                   icon-name: bind $format_rating_icon_name(template.model as <$NocturneModelArtist> .userRating, 4);
-                  clicked => $change_rating();
+                  clicked => $change_rating() swapped;
                   styles [
                     "flat"
                   ]
@@ -131,7 +131,7 @@ template $NocturneArtistPage: Adw.NavigationPage {
                   name: "5";
                   tooltip-text: _("5 Stars");
                   icon-name: bind $format_rating_icon_name(template.model as <$NocturneModelArtist> .userRating, 5);
-                  clicked => $change_rating();
+                  clicked => $change_rating() swapped;
                   styles [
                     "flat"
                   ]

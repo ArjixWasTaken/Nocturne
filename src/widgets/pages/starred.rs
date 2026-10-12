@@ -191,7 +191,7 @@ impl StarredPage {
     }
 
     #[template_callback]
-    fn scroll_edge_reached(&self, _sw: &gtk::ScrolledWindow, pos: gtk::PositionType) {
+    fn scroll_edge_reached(&self, pos: gtk::PositionType, _sw: &gtk::ScrolledWindow) {
         if pos == gtk::PositionType::Bottom && self.imp().offset.get() < self.imp().item_ids.borrow().len() {
             self.search();
         }

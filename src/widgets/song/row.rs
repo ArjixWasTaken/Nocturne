@@ -61,7 +61,7 @@ mod imp {
             !is_external && radio.unwrap_or_default().is_empty()
         }
         #[template_callback]
-        fn on_drop(&self, _target: &gtk::DropTarget, value: glib::Value, _x: f64, y: f64) -> bool {
+        fn on_drop(&self, value: glib::Value, _x: f64, y: f64, _target: &gtk::DropTarget) -> bool {
             let obj = self.obj();
             let Ok(row) = value.get::<super::SongRow>() else { return false };
             if row == *obj || !self.draggable.get() {
@@ -78,13 +78,13 @@ mod imp {
             true
         }
         #[template_callback]
-        fn on_drag_begin(&self, source: &gtk::DragSource, _drag: &gdk::Drag) {
+        fn on_drag_begin(&self, _drag: &gdk::Drag, source: &gtk::DragSource) {
             if self.draggable.get() {
                 source.set_icon(Some(&gtk::WidgetPaintable::new(Some(&*self.obj()))), 0, 0);
             }
         }
         #[template_callback]
-        fn on_drag_prepare(&self, _source: &gtk::DragSource, _x: f64, _y: f64) -> Option<gdk::ContentProvider> {
+        fn on_drag_prepare(&self, _x: f64, _y: f64, _source: &gtk::DragSource) -> Option<gdk::ContentProvider> {
             self.draggable.get().then(|| gdk::ContentProvider::for_value(&self.obj().to_value()))
         }
         #[template_callback]
@@ -97,7 +97,7 @@ mod imp {
             }
         }
         #[template_callback]
-        fn on_context_button_active(&self, button: &gtk::MenuButton) {
+        fn on_context_button_active(&self, _pspec: glib::ParamSpec, button: &gtk::MenuButton) {
             if let Some(p) = button.popover() {
                 p.set_child(Some(&context::container(&self.obj().context_items(), &self.obj().id())));
             }

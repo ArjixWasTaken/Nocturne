@@ -40,7 +40,7 @@ mod imp {
     #[gtk::template_callbacks]
     impl DownloadRow {
         #[template_callback]
-        fn progressbar_frac_changed(&self, bar: &gtk::ProgressBar) {
+        fn progressbar_frac_changed(&self, _pspec: glib::ParamSpec, bar: &gtk::ProgressBar) {
             if bar.fraction() >= 1.0 {
                 self.done_button.set_visible(true);
                 self.done_label.set_visible(true);

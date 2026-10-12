@@ -58,20 +58,20 @@ template $NocturneSongButton: Gtk.Box {
     };
     Gtk.GestureClick {
       button: 3;
-      released => $show_popover_image();
+      released => $show_popover_image() swapped;
     }
     Gtk.GestureLongPress {
-      pressed => $show_popover_image();
+      pressed => $show_popover_image() swapped;
     }
   }
 
   Gtk.Button artist_el {
     Gtk.GestureClick {
       button: 3;
-      released => $show_popover_artist();
+      released => $show_popover_artist() swapped;
     }
     Gtk.GestureLongPress {
-      pressed => $show_popover_artist();
+      pressed => $show_popover_artist() swapped;
     }
     styles [
       "dimmed",

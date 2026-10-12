@@ -38,7 +38,7 @@ template $NocturneDownloadRow: Gtk.ListBoxRow {
       }
       Gtk.ProgressBar progressbar {
         hexpand: true;
-        notify::fraction => $progressbar_frac_changed();
+        notify::fraction => $progressbar_frac_changed() swapped;
       }
     }
 
@@ -51,7 +51,7 @@ template $NocturneDownloadRow: Gtk.ListBoxRow {
       visible: false;
       tooltip-text: _("Remove From Queue");
       icon-name: "check-plain-symbolic";
-      clicked => $remove_from_queue();
+      clicked => $remove_from_queue() swapped;
     }
   };
 }

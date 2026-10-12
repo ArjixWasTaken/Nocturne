@@ -137,7 +137,7 @@ impl PlayingFooter {
     }
 
     #[template_callback]
-    fn progress_bar_changed(&self, scale: &gtk::Scale, _scroll: gtk::ScrollType, value: f64) -> bool {
+    fn progress_bar_changed(&self, _scroll: gtk::ScrollType, value: f64, scale: &gtk::Scale) -> bool {
         delayed_seek(scale, value);
         false
     }

@@ -14,7 +14,7 @@ template $NocturneHomePage: Adw.NavigationPage {
         icon-name: "system-search-symbolic";
         tooltip-text: _("Toggle Search");
         active: bind search_bar.search-mode-enabled;
-        toggled => $search_mode_toggled();
+        toggled => $search_mode_toggled() swapped;
       }
       title-widget: Gtk.SearchBar search_bar {
         search-mode-enabled: bind search_toggle.active;
@@ -22,7 +22,7 @@ template $NocturneHomePage: Adw.NavigationPage {
           hexpand: true;
           key-capture-widget: main_stack;
           placeholder-text: _("Search");
-          search-changed => $on_search();
+          search-changed => $on_search() swapped;
         };
       };
       [end]
@@ -32,7 +32,7 @@ template $NocturneHomePage: Adw.NavigationPage {
         styles ["flat"]
 
         // Connect a signal handler from your code
-        clicked => $refresh();
+        clicked => $refresh() swapped;
 
         child: Gtk.Stack refresh_stack_el{
           transition-type: crossfade;

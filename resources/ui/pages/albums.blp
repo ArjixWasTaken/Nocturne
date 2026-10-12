@@ -21,7 +21,7 @@ template $NocturneAlbumsPage: Adw.NavigationPage {
         child: Gtk.ScrolledWindow scrolledwindow {
           propagate-natural-width: true;
           propagate-natural-height: true;
-          edge-reached => $scroll_edge_reached();
+          edge-reached => $scroll_edge_reached() swapped;
 
           child: Adw.Clamp {
             maximum-size: 2000;

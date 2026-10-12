@@ -21,7 +21,7 @@ template $NocturneSetupPage: Adw.NavigationPage {
           child: Gtk.Button {
             label: _("Download (~20 mb)");
             tooltip-text: _("Download");
-            clicked => $download_clicked();
+            clicked => $download_clicked() swapped;
             halign: center;
           };
         };
@@ -61,13 +61,13 @@ template $NocturneSetupPage: Adw.NavigationPage {
             Gtk.LinkButton {
               uri: "http://127.0.0.1:4534";
               label: _("Instance Webpage");
-              activate-link => $link_visited();
+              activate-link => $link_visited() swapped;
             }
             Gtk.Button continue_button {
               label: _("Continue");
               tooltip-text: _("Continue");
               sensitive: false;
-              clicked => $continue_clicked();
+              clicked => $continue_clicked() swapped;
             }
           };
         };

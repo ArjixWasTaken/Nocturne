@@ -8,8 +8,8 @@ template $NocturnePopoutWindow: Adw.ApplicationWindow {
   default-width: 430;
   default-height: 740;
   hide-on-close: true;
-  close-request => $close_request();
-  notify::fullscreened => $fullscreen_toggled();
+  close-request => $close_request() swapped;
+  notify::fullscreened => $fullscreen_toggled() swapped;
   styles [
     "popout-window"
   ]
@@ -22,8 +22,8 @@ template $NocturnePopoutWindow: Adw.ApplicationWindow {
       sidebar_extra_container.visible: true;
       header_view_switcher.visible: false;
     }
-    apply => $big_mode_apply();
-    unapply => $big_mode_unapply();
+    apply => $big_mode_apply() swapped;
+    unapply => $big_mode_unapply() swapped;
   }
   Adw.Breakpoint breakpoint_el {
     condition ("max-width: 620sp")

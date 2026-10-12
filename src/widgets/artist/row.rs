@@ -40,7 +40,7 @@ mod imp {
     #[gtk::template_callbacks]
     impl ArtistRow {
         #[template_callback]
-        fn on_context_button_active(&self, button: &gtk::MenuButton) {
+        fn on_context_button_active(&self, _pspec: glib::ParamSpec, button: &gtk::MenuButton) {
             if let (Some(p), Some(m)) = (button.popover(), self.model.borrow().as_ref()) {
                 p.set_child(Some(&context::container(&context::artist_items(), &m.id())));
             }

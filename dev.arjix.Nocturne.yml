@@ -42,6 +42,7 @@ modules:
         skip:
           - target
           - .flatpak-builder
+          - .git
       # Vendored crates, regenerate after changing Cargo.lock:
       #   flatpak-cargo-generator.py Cargo.lock -o cargo-sources.json
       - cargo-sources.json

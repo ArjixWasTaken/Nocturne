@@ -74,7 +74,7 @@ mod imp {
             false
         }
         #[template_callback]
-        fn state_stack_changed(&self, stack: &gtk::Stack) {
+        fn state_stack_changed(&self, _pspec: glib::ParamSpec, stack: &gtk::Stack) {
             self.position_spin.set_sensitive(stack.visible_child_name().as_deref() == Some("play"));
         }
         #[template_callback]

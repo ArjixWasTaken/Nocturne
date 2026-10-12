@@ -15,7 +15,7 @@ template $NocturneLyricsDialog: Adw.Dialog {
       Gtk.Button {
         label: _("Cancel");
         tooltip-text: _("Cancel");
-        clicked => $cancel_clicked();
+        clicked => $cancel_clicked() swapped;
       }
 
       [end]
@@ -25,7 +25,7 @@ template $NocturneLyricsDialog: Adw.Dialog {
         styles [
           "suggested-action"
         ]
-        clicked => $save_clicked();
+        clicked => $save_clicked() swapped;
       }
     }
 
@@ -36,7 +36,7 @@ template $NocturneLyricsDialog: Adw.Dialog {
         spacing: 5;
         Gtk.Stack state_stack_el {
           transition-type: crossfade;
-          notify::visible-child-name => $state_stack_changed();
+          notify::visible-child-name => $state_stack_changed() swapped;
 
           Gtk.StackPage {
             name: "play";
@@ -75,21 +75,21 @@ template $NocturneLyricsDialog: Adw.Dialog {
             step-increment: 0.10;
           };
           digits: 2;
-          output => $position_spin_changed();
+          output => $position_spin_changed() swapped;
         }
 
         Gtk.Scale progress_el {
           orientation: horizontal;
           hexpand: true;
           GestureClick {
-            pressed => $seek_start();
-            stopped => $seek_end();
+            pressed => $seek_start() swapped;
+            stopped => $seek_end() swapped;
           }
           adjustment: Gtk.Adjustment {
             lower: 0;
             upper: 1;
             value: 0;
-            value-changed => $progress_bar_changed();
+            value-changed => $progress_bar_changed() swapped;
           };
           styles [
             "p0"
@@ -102,7 +102,7 @@ template $NocturneLyricsDialog: Adw.Dialog {
         Gtk.Button {
           tooltip-text: _("Set Next Line Timestamp to Now");
           icon-name: "stopwatch-symbolic";
-          clicked => $set_next_timestamp();
+          clicked => $set_next_timestamp() swapped;
           styles [
             "circular"
           ]
@@ -111,7 +111,7 @@ template $NocturneLyricsDialog: Adw.Dialog {
         Gtk.Button {
           tooltip-text: _("Add Line at Timestamp");
           icon-name: "list-add-symbolic";
-          clicked => $add_line();
+          clicked => $add_line() swapped;
           styles [
             "circular"
           ]

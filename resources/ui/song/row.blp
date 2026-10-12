@@ -10,15 +10,15 @@ template $NocturneSongRow: Adw.ActionRow {
 
   Gtk.GestureClick {
     button: 3;
-    released => $show_popover();
+    released => $show_popover() swapped;
   }
   Gtk.GestureLongPress {
-    pressed => $show_popover();
+    pressed => $show_popover() swapped;
   }
 
   Gtk.DropTarget {
     formats: "NocturneSongRow";
-    drop => $on_drop();
+    drop => $on_drop() swapped;
     actions: move;
   }
 
@@ -39,8 +39,8 @@ template $NocturneSongRow: Adw.ActionRow {
       ]
 
       Gtk.DragSource {
-        drag-begin => $on_drag_begin();
-        prepare => $on_drag_prepare();
+        drag-begin => $on_drag_begin() swapped;
+        prepare => $on_drag_prepare() swapped;
         actions: move;
       }
       accessibility {
@@ -130,7 +130,7 @@ template $NocturneSongRow: Adw.ActionRow {
             ]
             icon-name: "view-more-symbolic";
             valign: center;
-            notify::active => $on_context_button_active();
+            notify::active => $on_context_button_active() swapped;
             popover: Gtk.Popover {
               child: Adw.Spinner {};
             };
@@ -144,7 +144,7 @@ template $NocturneSongRow: Adw.ActionRow {
 
         child: Gtk.CheckButton check_el {
           halign: center;
-          toggled => $check_toggled();
+          toggled => $check_toggled() swapped;
           accessibility {
             label: _("Selection box");
           }

@@ -41,7 +41,7 @@ template $NocturneSongQueue: Gtk.Box {
         ]
         icon-name: "window-close-symbolic";
         tooltip-text: _("Close");
-        clicked => $close_selector();
+        clicked => $close_selector() swapped;
       }
 
       Gtk.Button select_all_el {
@@ -50,7 +50,7 @@ template $NocturneSongQueue: Gtk.Box {
           label: _("Select All");
         };
         tooltip-text: _("Select All");
-        clicked => $select_all();
+        clicked => $select_all() swapped;
       }
       Gtk.Button play_el {
         child: Adw.ButtonContent {
@@ -58,7 +58,7 @@ template $NocturneSongQueue: Gtk.Box {
           label: _("Play");
         };
         tooltip-text: _("Play");
-        clicked => $play_selected();
+        clicked => $play_selected() swapped;
       }
       Gtk.Button play_next_el {
         child: Adw.ButtonContent {
@@ -66,7 +66,7 @@ template $NocturneSongQueue: Gtk.Box {
           label: _("Play Next");
         };
         tooltip-text: _("Play Next");
-        clicked => $play_next_selected();
+        clicked => $play_next_selected() swapped;
       }
       Gtk.Button play_later_el {
         child: Adw.ButtonContent {
@@ -74,7 +74,7 @@ template $NocturneSongQueue: Gtk.Box {
           label: _("Play Later");
         };
         tooltip-text: _("Play Later");
-        clicked => $play_later_selected();
+        clicked => $play_later_selected() swapped;
       }
       Gtk.Button {
         child: Adw.ButtonContent {
@@ -82,7 +82,7 @@ template $NocturneSongQueue: Gtk.Box {
           label: _("Add To Playlist");
         };
         tooltip-text: _("Add To Playlist");
-        clicked => $add_to_playlist_selected();
+        clicked => $add_to_playlist_selected() swapped;
       }
       Gtk.Button download_el {
         child: Adw.ButtonContent {
@@ -90,7 +90,7 @@ template $NocturneSongQueue: Gtk.Box {
           label: _("Download");
         };
         tooltip-text: _("Download");
-        clicked => $download_selected();
+        clicked => $download_selected() swapped;
       }
       Gtk.Button remove_el {
         styles [
@@ -101,7 +101,7 @@ template $NocturneSongQueue: Gtk.Box {
           label: _("Remove");
         };
         tooltip-text: _("Remove");
-        clicked => $remove_selected();
+        clicked => $remove_selected() swapped;
       }
       Gtk.Button delete_download_el {
         styles [
@@ -112,7 +112,7 @@ template $NocturneSongQueue: Gtk.Box {
           label: _("Delete Download");
         };
         tooltip-text: _("Delete Download");
-        clicked => $delete_download_selected();
+        clicked => $delete_download_selected() swapped;
       }
     };
   }

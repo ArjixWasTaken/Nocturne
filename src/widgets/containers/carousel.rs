@@ -49,7 +49,7 @@ mod imp {
     #[gtk::template_callbacks]
     impl Carousel {
         #[template_callback]
-        fn on_scroll(&self, controller: &gtk::EventControllerScroll, dx: f64, dy: f64) -> bool {
+        fn on_scroll(&self, dx: f64, dy: f64, controller: &gtk::EventControllerScroll) -> bool {
             let list = &*self.list_el;
             let pos = list.position();
             if pos == pos.trunc() {
@@ -73,7 +73,7 @@ mod imp {
             self.obj().pan(true);
         }
         #[template_callback]
-        fn page_changed(&self, _carousel: &adw::Carousel, index: u32) {
+        fn page_changed(&self, index: u32, _carousel: &adw::Carousel) {
             self.pan_start_el.set_sensitive(index != 0);
             self.pan_end_el.set_sensitive(index + 1 != self.list_el.n_pages());
         }

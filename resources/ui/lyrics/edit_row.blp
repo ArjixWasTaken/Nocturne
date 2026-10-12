@@ -18,7 +18,7 @@ template $NocturneLyricEditRow: Adw.EntryRow {
             icon-name: "snapshots-alt-symbolic";
             halign: start;
           };
-          clicked => $go_to_timestamp();
+          clicked => $go_to_timestamp() swapped;
           styles [
             "flat"
           ]
@@ -30,7 +30,7 @@ template $NocturneLyricEditRow: Adw.EntryRow {
             icon-name: "stopwatch-symbolic";
             halign: start;
           };
-          clicked => $set_current_timestamp();
+          clicked => $set_current_timestamp() swapped;
           styles [
             "flat"
           ]
@@ -42,7 +42,7 @@ template $NocturneLyricEditRow: Adw.EntryRow {
             icon-name: "user-trash-symbolic";
             halign: start;
           };
-          clicked => $remove();
+          clicked => $remove() swapped;
           styles [
             "flat",
             "error"

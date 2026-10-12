@@ -14,7 +14,7 @@ template $NocturnePlaylistPage: Adw.NavigationPage {
     content: Gtk.ScrolledWindow {
       propagate-natural-width: true;
       propagate-natural-height: true;
-      edge-reached => $scroll_edge_reached();
+      edge-reached => $scroll_edge_reached() swapped;
 
       child: Adw.Clamp clamp_el {
         tightening-threshold: 800;

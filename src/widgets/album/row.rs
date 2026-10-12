@@ -42,7 +42,7 @@ mod imp {
             if p.is_some() { 48 } else { -1 }
         }
         #[template_callback]
-        fn on_context_button_active(&self, button: &gtk::MenuButton) {
+        fn on_context_button_active(&self, _pspec: glib::ParamSpec, button: &gtk::MenuButton) {
             if let (Some(p), Some(m)) = (button.popover(), self.model.borrow().as_ref()) {
                 p.set_child(Some(&context::container(&context::album_items(), &m.id())));
             }

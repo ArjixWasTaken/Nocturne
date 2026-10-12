@@ -109,7 +109,7 @@ template $NocturnePlayingControlPage: Adw.NavigationPage {
 
             Gtk.Scale progress_el {
               orientation: horizontal;
-              change-value => $progress_bar_changed();
+              change-value => $progress_bar_changed() swapped;
               adjustment: Gtk.Adjustment {
                 lower: 0;
                 upper: 1;
@@ -227,7 +227,7 @@ template $NocturnePlayingControlPage: Adw.NavigationPage {
                       name: "1";
                       tooltip-text: _("1 Star");
                       icon-name: "non-starred-symbolic";
-                      clicked => $change_rating();
+                      clicked => $change_rating() swapped;
                       styles [
                         "flat"
                       ]
@@ -236,7 +236,7 @@ template $NocturnePlayingControlPage: Adw.NavigationPage {
                       name: "2";
                       tooltip-text: _("2 Stars");
                       icon-name: "non-starred-symbolic";
-                      clicked => $change_rating();
+                      clicked => $change_rating() swapped;
                       styles [
                         "flat"
                       ]
@@ -245,7 +245,7 @@ template $NocturnePlayingControlPage: Adw.NavigationPage {
                       name: "3";
                       tooltip-text: _("3 Stars");
                       icon-name: "non-starred-symbolic";
-                      clicked => $change_rating();
+                      clicked => $change_rating() swapped;
                       styles [
                         "flat"
                       ]
@@ -254,7 +254,7 @@ template $NocturnePlayingControlPage: Adw.NavigationPage {
                       name: "4";
                       tooltip-text: _("4 Stars");
                       icon-name: "non-starred-symbolic";
-                      clicked => $change_rating();
+                      clicked => $change_rating() swapped;
                       styles [
                         "flat"
                       ]
@@ -263,7 +263,7 @@ template $NocturnePlayingControlPage: Adw.NavigationPage {
                       name: "5";
                       tooltip-text: _("5 Stars");
                       icon-name: "non-starred-symbolic";
-                      clicked => $change_rating();
+                      clicked => $change_rating() swapped;
                       styles [
                         "flat"
                       ]
@@ -282,7 +282,7 @@ template $NocturnePlayingControlPage: Adw.NavigationPage {
               Gtk.Button show_sidebar_el {
                 icon-name: "sidebar-show-right-symbolic";
                 tooltip-text: _("Toggle Sidebar");
-                clicked => $show_content_clicked();
+                clicked => $show_content_clicked() swapped;
               }
             }
           }

@@ -13,7 +13,7 @@ template $NocturnePlaybackPage: Adw.NavigationPage {
       [start]
       Gtk.Button {
         icon-name: "user-home-symbolic";
-        clicked => $go_home();
+        clicked => $go_home() swapped;
         tooltip-text: _("Go Home");
       }
 
@@ -79,7 +79,7 @@ template $NocturnePlaybackPage: Adw.NavigationPage {
                     "suggested-action",
                     "pill"
                   ]
-                  clicked => $save_playlist();
+                  clicked => $save_playlist() swapped;
                   tooltip-text: _("Save Playlist");
                   child: Adw.ButtonContent {
                     label: _("Save Playlist");
