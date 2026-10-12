@@ -9,7 +9,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/playlist/dialog.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/playlist/dialog.ui")]
     pub struct PlaylistDialog {
         #[template_child]
         pub search_entry_el: TemplateChild<gtk::SearchEntry>,

@@ -8,7 +8,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/pages/playback.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/pages/playback.ui")]
     pub struct PlaybackPage {
         #[template_child]
         pub top_wrapbox: TemplateChild<gtk::Widget>,

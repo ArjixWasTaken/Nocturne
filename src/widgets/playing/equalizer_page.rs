@@ -7,7 +7,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/playing/equalizer_page.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/playing/equalizer_page.ui")]
     pub struct EqualizerPage {
         #[template_child]
         pub container: TemplateChild<gtk::Box>,

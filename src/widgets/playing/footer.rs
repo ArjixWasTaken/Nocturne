@@ -10,7 +10,7 @@ mod imp {
 
     #[derive(Default, CompositeTemplate, glib::Properties)]
     #[properties(wrapper_type = super::PlayingFooter)]
-    #[template(resource = "/com/jeffser/Nocturne/playing/footer.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/playing/footer.ui")]
     pub struct PlayingFooter {
         #[template_child]
         pub cover_el: TemplateChild<gtk::Image>,

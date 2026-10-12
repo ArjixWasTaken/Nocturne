@@ -10,8 +10,12 @@ fn main() {
         .args(["batch-compile", ui_out.to_str().unwrap(), "resources/ui"])
         .args(&blps)
         .status();
+    println!("cargo:rerun-if-env-changed=NOCTURNE_PLACEHOLDER_UI");
     if !matches!(status, Ok(s) if s.success()) {
-        // Allows `cargo check` on hosts whose libadwaita is too old for the templates.
+        // Opt-in escape hatch for `cargo check` on hosts whose libadwaita is too old for the templates.
+        if std::env::var_os("NOCTURNE_PLACEHOLDER_UI").is_none() {
+            panic!("blueprint-compiler failed (set NOCTURNE_PLACEHOLDER_UI=1 to build with empty templates)");
+        }
         println!("cargo:warning=blueprint-compiler failed; UI templates will be empty placeholders");
         for blp in &blps {
             let rel = Path::new(blp).strip_prefix("resources/ui").unwrap().with_extension("ui");

@@ -7,7 +7,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/song/details_dialog.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/song/details_dialog.ui")]
     pub struct SongDetailsDialog {
         #[template_child]
         pub cover_el: TemplateChild<gtk::Picture>,

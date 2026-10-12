@@ -8,7 +8,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/lyrics/edit_row.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/lyrics/edit_row.ui")]
     pub struct LyricEditRow {
         #[template_child]
         pub ts_button: TemplateChild<gtk::MenuButton>,

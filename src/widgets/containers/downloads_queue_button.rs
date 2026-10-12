@@ -9,7 +9,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/containers/downloads_queue_button.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/containers/downloads_queue_button.ui")]
     pub struct DownloadsQueueButton {
         #[template_child]
         pub menu_button: TemplateChild<gtk::MenuButton>,

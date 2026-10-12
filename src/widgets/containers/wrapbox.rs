@@ -8,7 +8,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate, glib::Properties)]
-    #[template(resource = "/com/jeffser/Nocturne/containers/wrapbox.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/containers/wrapbox.ui")]
     #[properties(wrapper_type = super::Wrapbox)]
     pub struct Wrapbox {
         #[template_child]

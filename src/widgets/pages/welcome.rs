@@ -6,7 +6,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/pages/welcome.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/pages/welcome.ui")]
     pub struct WelcomePage {
         #[template_child]
         pub listbox_el: TemplateChild<gtk::ListBox>,

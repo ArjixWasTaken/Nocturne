@@ -6,7 +6,7 @@ use std::rc::Rc;
 
 pub fn start(player: Player, raise: impl Fn() + 'static) {
     spawn_local(async move {
-        let mpris = match mpris_server::Player::builder("com.jeffser.Nocturne")
+        let mpris = match mpris_server::Player::builder("dev.arjix.Nocturne")
             .identity("Nocturne")
             .desktop_entry(crate::config::APP_ID)
             .can_play(true)
@@ -75,7 +75,7 @@ fn metadata(p: &Player) -> Metadata {
     let song = integ.song(&id);
     let mut m = Metadata::new();
     let safe: String = id.chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '_' }).collect();
-    if let Ok(t) = TrackId::try_from(format!("/com/jeffser/Nocturne/track/{safe}")) {
+    if let Ok(t) = TrackId::try_from(format!("/dev/arjix/Nocturne/track/{safe}")) {
         m.set_trackid(Some(t));
     }
     m.set_title(Some(state.displaySongTitle()));

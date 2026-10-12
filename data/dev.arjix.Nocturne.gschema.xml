@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="nocturne">
-	<schema id="com.jeffser.Nocturne" path="/com/jeffser/Nocturne/">
+	<schema id="dev.arjix.Nocturne" path="/dev/arjix/Nocturne/">
 	  <!--# Preferences-->
 	  <!--## Page: General -->
 	  <!--### Section: Behavior -->

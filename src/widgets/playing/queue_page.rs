@@ -8,7 +8,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/playing/queue_page.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/playing/queue_page.ui")]
     pub struct PlayingQueuePage {
         #[template_child]
         pub song_list_el: TemplateChild<gtk::ListBox>,

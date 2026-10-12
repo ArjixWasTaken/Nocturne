@@ -1,4 +1,4 @@
-application_id = 'com.jeffser.Nocturne'
+application_id = 'dev.arjix.Nocturne'
 
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(

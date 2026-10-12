@@ -9,7 +9,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate, glib::Properties)]
-    #[template(resource = "/com/jeffser/Nocturne/album/button.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/album/button.ui")]
     #[properties(wrapper_type = super::AlbumButton)]
     pub struct AlbumButton {
         #[template_child]

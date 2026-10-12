@@ -1,7 +1,7 @@
 use gtk::{gio, glib};
 use std::path::PathBuf;
 
-pub const APP_ID: &str = "com.jeffser.Nocturne";
+pub const APP_ID: &str = "dev.arjix.Nocturne";
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 thread_local! {

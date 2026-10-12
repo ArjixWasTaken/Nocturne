@@ -1,9 +1,9 @@
-<p align="center"><img src="https://jeffser.com/images/nocturne/logo.svg">
+<p align="center"><img src="data/icons/hicolor/scalable/apps/dev.arjix.Nocturne.svg" width="128">
 <h1 align="center">Nocturne</h1>
 
 <p align="center">Nocturne is a Jellyfin, OpenSubsonic and Bandcamp client that brings all your music together in one place, Nocturne not only connects to existing instances but it's capable of installing and managing its own Navidrome instance</p>
 
-<p align="center"><a href='https://flathub.org/apps/com.jeffser.Nocturne'><img width='190' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a></p>
+<p align="center">Rust rewrite maintained by <a href='https://github.com/ArjixWasTaken'>ArjixWasTaken</a>, based on the original Nocturne by <a href='https://github.com/Jeffser/Nocturne'>Jeffser</a>. Builds are published on the <a href='https://github.com/ArjixWasTaken/Nocturne/releases'>releases page</a>.</p>
 
 ---
 
@@ -31,53 +31,12 @@ HomePage | Song Playing
 :------------------:|:-----------------:
 ![screenie1](https://jeffser.com/images/nocturne/screenie1.png) | ![screenie2](https://jeffser.com/images/nocturne/screenie3.png)
 
-## Install (Official)
+## Install
 
-These are the officially supported packages that have been validated and are guaranteed to be up to date with the project.
-
-### Linux (Flatpak)
-
-Most Linux distributions come with Flatpak preinstalled, make sure your device has [the Flathub repo enabled](https://flathub.org/en/setup).
+Download the latest `.flatpak` bundle from the [releases page](https://github.com/ArjixWasTaken/Nocturne/releases) (built automatically from the `dev` branch) and install it. The GNOME 50 runtime comes from Flathub:
 ```sh
-flatpak install flathub com.jeffser.Nocturne
-```
-
-### Arch Linux (AUR)
-
-Nocturne is packaged officially in the AUR, to install it first make sure you have an AUR helper such as [yay](https://github.com/jguer/yay).
-```sh
-yay -S nocturne
-```
-
-By default, this package is missing a dependency required to play videos. To add this functionality, install this package.
-```sh
-yay -S gst-plugin-gtk4
-```
-
-## Install (Unofficial)
-
-Nocturne is an open source project that accepts and encourages the creation of independent packages, although I cannot guarantee that they are up to date.
-
-### Debian
-
-Nocturne is packaged unofficially in the official Debian archive (Available in Debian 14 'forky' and above). Install it via apt.
-```sh
-apt install nocturne
-```
-
-### NixOS/nix
-
-Nocturne is packaged unofficially in nixpkgs.
-You can either try it out using nix-shell:
-```sh
-nix-shell -p nocturne
-```
-
-or add it to your sytem packages:
-```nix
-environment.systemPackages = [
-pkgs.nocturne
-];
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install --user ./nocturne-v*.flatpak
 ```
 
 ## Build
@@ -86,8 +45,8 @@ pkgs.nocturne
 
 Dependencies are automatically managed and built depending on host environment.
 ```sh
-flatpak-builder build com.jeffser.Nocturne.yml --force-clean --install-deps-from=flathub
-flatpak-builder --run build com.jeffser.Nocturne.yml nocturne
+flatpak-builder build dev.arjix.Nocturne.yml --force-clean --install-deps-from=flathub
+flatpak-builder --run build dev.arjix.Nocturne.yml nocturne
 ```
 
 ### From source (Rust)
@@ -109,7 +68,7 @@ ninja -C build install
 In addition to running Nocturne by opening it graphically, you can also start it from a terminal.
 ```sh
 # Flatpak
-flatpak run com.jeffser.Nocturne
+flatpak run dev.arjix.Nocturne
 
 # Others
 nocturne
@@ -119,7 +78,7 @@ You can also control Nocturne from a terminal, to get started make sure Nocturne
 
 ```sh
 # Flatpak
-flatpak run com.jeffser.Nocturne --help
+flatpak run dev.arjix.Nocturne --help
 
 # Others
 nocturne --help

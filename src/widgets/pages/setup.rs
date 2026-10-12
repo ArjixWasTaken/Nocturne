@@ -7,7 +7,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/pages/setup.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/pages/setup.ui")]
     pub struct SetupPage {}
 
     #[glib::object_subclass]

@@ -10,7 +10,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/preferences.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/preferences.ui")]
     pub struct PreferencesDialog {
         #[template_child] pub restore_el: TemplateChild<gtk::Widget>,
         #[template_child] pub hide_on_close_el: TemplateChild<gtk::Widget>,

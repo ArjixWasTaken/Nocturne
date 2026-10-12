@@ -6,7 +6,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/containers/page_dialog.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/containers/page_dialog.ui")]
     pub struct PageDialog {
         #[template_child]
         pub navigation_view: TemplateChild<adw::NavigationView>,

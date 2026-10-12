@@ -9,7 +9,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/playing/popout_window.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/playing/popout_window.ui")]
     pub struct PopoutWindow {
         #[template_child]
         pub playing_page: TemplateChild<PlayingControlPage>,

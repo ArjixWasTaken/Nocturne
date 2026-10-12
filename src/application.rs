@@ -46,7 +46,7 @@ mod imp {
             crate::widgets::ensure_types();
             if let Some(display) = gdk::Display::default() {
                 gtk::style_context_add_provider_for_display(&display, &self.css_provider, gtk::STYLE_PROVIDER_PRIORITY_APPLICATION);
-                gtk::IconTheme::for_display(&display).add_resource_path("/com/jeffser/Nocturne/icons");
+                gtk::IconTheme::for_display(&display).add_resource_path("/dev/arjix/Nocturne/icons");
             }
             crate::actions::register(&obj);
         }
@@ -94,7 +94,7 @@ impl Default for Application {
         glib::Object::builder()
             .property("application-id", APP_ID)
             .property("flags", gio::ApplicationFlags::HANDLES_OPEN)
-            .property("resource-base-path", "/com/jeffser/Nocturne")
+            .property("resource-base-path", "/dev/arjix/Nocturne")
             .build()
     }
 }

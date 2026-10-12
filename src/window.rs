@@ -87,7 +87,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/window.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/window.ui")]
     pub struct Window {
         #[template_child]
         pub loading_label_el: TemplateChild<gtk::Label>,

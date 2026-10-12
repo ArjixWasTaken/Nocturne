@@ -12,7 +12,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/pages/starred.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/pages/starred.ui")]
     pub struct StarredPage {
         #[template_child]
         pub list_el: TemplateChild<crate::widgets::song::SongQueue>,

@@ -8,7 +8,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate, glib::Properties)]
-    #[template(resource = "/com/jeffser/Nocturne/containers/carousel.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/containers/carousel.ui")]
     #[properties(wrapper_type = super::Carousel)]
     pub struct Carousel {
         #[template_child]

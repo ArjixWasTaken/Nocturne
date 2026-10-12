@@ -8,7 +8,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/containers/download_row.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/containers/download_row.ui")]
     pub struct DownloadRow {
         #[template_child]
         pub title_label: TemplateChild<gtk::Label>,

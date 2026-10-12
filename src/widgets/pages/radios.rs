@@ -9,7 +9,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/pages/radios.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/pages/radios.ui")]
     pub struct RadiosPage {
         #[template_child]
         pub main_stack: TemplateChild<gtk::Stack>,

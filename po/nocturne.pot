@@ -18,118 +18,118 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: data/com.jeffser.Nocturne.desktop.in:2
-#: data/com.jeffser.Nocturne.metainfo.xml.in:7
+#: data/dev.arjix.Nocturne.desktop.in:2
+#: data/dev.arjix.Nocturne.metainfo.xml.in:7
 msgid "Nocturne"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.desktop.in:10
+#: data/dev.arjix.Nocturne.desktop.in:10
 msgid "GTK;Navidrome;Jellyfin;Music;"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:8
+#: data/dev.arjix.Nocturne.metainfo.xml.in:8
 msgid "Bring your music library together"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:10
+#: data/dev.arjix.Nocturne.metainfo.xml.in:10
 msgid "A modern music client"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:11
+#: data/dev.arjix.Nocturne.metainfo.xml.in:11
 msgid "Features"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:13
+#: data/dev.arjix.Nocturne.metainfo.xml.in:13
 msgid "Compatibility with Jellyfin, OpenSubsonic, Bandcamp and local files"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:14
+#: data/dev.arjix.Nocturne.metainfo.xml.in:14
 msgid "Exploration by songs, artists, albums, radios and playlists"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:15
+#: data/dev.arjix.Nocturne.metainfo.xml.in:15
 msgid "Playlist management"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:16
+#: data/dev.arjix.Nocturne.metainfo.xml.in:16
 msgid "Audio equalizer and audio visualizer"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:17
+#: data/dev.arjix.Nocturne.metainfo.xml.in:17
 msgid "Mpris integration"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:18
+#: data/dev.arjix.Nocturne.metainfo.xml.in:18
 msgid "Integrated Navidrome instance management"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:19
+#: data/dev.arjix.Nocturne.metainfo.xml.in:19
 msgid "Automatic lyrics fetching"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:20
+#: data/dev.arjix.Nocturne.metainfo.xml.in:20
 msgid "Downloads and offline mode"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:21
+#: data/dev.arjix.Nocturne.metainfo.xml.in:21
 msgid "Cool interface"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:26
+#: data/dev.arjix.Nocturne.metainfo.xml.in:26
 msgid "Jeffry Samuel Eduarte Rojas"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:66
+#: data/dev.arjix.Nocturne.metainfo.xml.in:66
 msgid "Main homepage"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:70
+#: data/dev.arjix.Nocturne.metainfo.xml.in:70
 msgid "Song queue"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:74
+#: data/dev.arjix.Nocturne.metainfo.xml.in:74
 #: src/ui/playing/popout_window.blp:93 src/ui/window.blp:192
 #: src/ui/window.blp:244
 msgid "Lyrics"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:78
+#: data/dev.arjix.Nocturne.metainfo.xml.in:78
 msgid "Song list"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:82
+#: data/dev.arjix.Nocturne.metainfo.xml.in:82
 msgid "Album page"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:86
+#: data/dev.arjix.Nocturne.metainfo.xml.in:86
 msgid "Mini Player"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:91
+#: data/dev.arjix.Nocturne.metainfo.xml.in:91
 msgid "opensubsonic"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:92
+#: data/dev.arjix.Nocturne.metainfo.xml.in:92
 msgid "bandcamp"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:93
+#: data/dev.arjix.Nocturne.metainfo.xml.in:93
 msgid "navidrome"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:94
+#: data/dev.arjix.Nocturne.metainfo.xml.in:94
 msgid "jellyfin"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:95
+#: data/dev.arjix.Nocturne.metainfo.xml.in:95
 msgid "music"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.metainfo.xml.in:96
+#: data/dev.arjix.Nocturne.metainfo.xml.in:96
 msgid "gtk"
 msgstr ""
 
-#: data/com.jeffser.Nocturne.SearchProvider.desktop.in:3
+#: data/dev.arjix.Nocturne.SearchProvider.desktop.in:3
 msgid "Nocturne Search Provider"
 msgstr ""
 

@@ -57,7 +57,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/pages/login.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/pages/login.ui")]
     pub struct LoginDialog {
         #[template_child]
         pub toast_overlay: TemplateChild<adw::ToastOverlay>,

@@ -1,4 +1,4 @@
-id: com.jeffser.Nocturne
+id: dev.arjix.Nocturne
 runtime: org.gnome.Platform
 runtime-version: '50'
 sdk: org.gnome.Sdk
@@ -16,6 +16,7 @@ finish-args:
   - '--device=dri'
   - '--socket=wayland'
   - '--socket=pulseaudio'
+  - '--own-name=org.mpris.MediaPlayer2.dev.arjix.Nocturne'
 cleanup:
   - /include
   - /lib/pkgconfig

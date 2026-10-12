@@ -1,9 +1,9 @@
 //! Passwords/tokens in the Secret Service keyring. Uses the same schema as the
-//! Python version (`com.jeffser.Nocturne.Password` + `type`), so existing logins survive.
+//! Python version (`dev.arjix.Nocturne.Password` + `type`), so existing logins survive.
 use anyhow::Result;
 use std::collections::HashMap;
 
-const SCHEMA: &str = "com.jeffser.Nocturne.Password";
+const SCHEMA: &str = "dev.arjix.Nocturne.Password";
 
 fn attrs(kind: &str) -> HashMap<&str, &str> {
     HashMap::from([("xdg:schema", SCHEMA), ("type", kind)])

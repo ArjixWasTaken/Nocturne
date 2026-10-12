@@ -13,7 +13,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/playing/playback_mode_button.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/playing/playback_mode_button.ui")]
     pub struct PlaybackModeButton {
         #[template_child]
         pub button: TemplateChild<gtk::MenuButton>,

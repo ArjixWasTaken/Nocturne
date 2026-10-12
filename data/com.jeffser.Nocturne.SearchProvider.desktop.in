@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Nocturne Search Provider
-Icon=com.jeffser.Nocturne
-DBusActivatable=true
-NoDisplay=true
-X-GNOME-SearchProvider-Prefix=com.jeffser.Nocturne
-X-GNOME-SearchProvider-Path=/com/jeffser/Nocturne/SearchProvider/

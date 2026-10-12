@@ -10,7 +10,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate, glib::Properties)]
-    #[template(resource = "/com/jeffser/Nocturne/song/queue.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/song/queue.ui")]
     #[properties(wrapper_type = super::SongQueue)]
     pub struct SongQueue {
         #[template_child]

@@ -10,7 +10,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/lyrics/dialog.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/lyrics/dialog.ui")]
     pub struct LyricsDialog {
         #[template_child]
         pub main_stack: TemplateChild<gtk::Stack>,

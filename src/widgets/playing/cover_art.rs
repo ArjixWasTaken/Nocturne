@@ -10,7 +10,7 @@ mod imp {
 
     #[derive(Default, CompositeTemplate, glib::Properties)]
     #[properties(wrapper_type = super::PlayingCoverArt)]
-    #[template(resource = "/com/jeffser/Nocturne/playing/cover_art.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/playing/cover_art.ui")]
     pub struct PlayingCoverArt {
         #[template_child]
         pub spectrum_el: TemplateChild<Spectrum>,

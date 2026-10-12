@@ -365,19 +365,19 @@ pub fn register(app: &Application) {
         let about = adw::AboutDialog::builder()
             .application_icon(crate::config::APP_ID)
             .application_name("Nocturne")
-            .developer_name("Jeffry Samuel")
-            .issue_url("https://github.com/Jeffser/Nocturne/issues")
+            .developer_name("ArjixWasTaken")
+            .issue_url("https://github.com/ArjixWasTaken/Nocturne/issues")
             .license_type(gtk::License::Gpl30)
-            .support_url("https://github.com/Jeffser/Nocturne/discussions")
+            .support_url("https://github.com/ArjixWasTaken/Nocturne/discussions")
             .version(crate::config::VERSION)
-            .website("https://jeffser.com/nocturne")
-            .developers(["Jeffser https://jeffser.com"])
-            .designers(["Jeffser https://jeffser.com"])
+            .website("https://arjix.dev")
+            .developers(["ArjixWasTaken https://arjix.dev", "Jeffry Samuel (original Python version) https://jeffser.com"])
+            .designers(["Jeffry Samuel https://jeffser.com"])
             .build();
         present(&about);
     });
     none(app, "shortcuts", &["<control>question"], || {
-        let b = gtk::Builder::from_resource("/com/jeffser/Nocturne/shortcuts-dialog.ui");
+        let b = gtk::Builder::from_resource("/dev/arjix/Nocturne/shortcuts-dialog.ui");
         if let Some(d) = b.object::<adw::Dialog>("shortcuts_dialog") {
             present(&d);
         }

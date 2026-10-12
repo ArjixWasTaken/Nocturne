@@ -101,7 +101,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/playing/lyrics_page.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/playing/lyrics_page.ui")]
     pub struct PlayingLyricsPage {
         #[template_child]
         pub stack: TemplateChild<gtk::Stack>,

@@ -7,7 +7,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/playing/volume_button.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/playing/volume_button.ui")]
     pub struct VolumeButton {
         #[template_child]
         pub volume_adjustment_el: TemplateChild<gtk::Adjustment>,

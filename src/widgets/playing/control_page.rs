@@ -10,7 +10,7 @@ mod imp {
 
     #[derive(Default, CompositeTemplate, glib::Properties)]
     #[properties(wrapper_type = super::PlayingControlPage)]
-    #[template(resource = "/com/jeffser/Nocturne/playing/control_page.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/playing/control_page.ui")]
     pub struct PlayingControlPage {
         #[template_child]
         pub header_bar: TemplateChild<adw::HeaderBar>,

@@ -12,7 +12,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate, glib::Properties)]
-    #[template(resource = "/com/jeffser/Nocturne/artist/page.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/artist/page.ui")]
     #[properties(wrapper_type = super::ArtistPage)]
     pub struct ArtistPage {
         #[template_child]

@@ -1,6 +1,6 @@
-data/com.jeffser.Nocturne.desktop.in
-data/com.jeffser.Nocturne.gschema.xml
-data/com.jeffser.Nocturne.metainfo.xml.in
+data/dev.arjix.Nocturne.desktop.in
+data/dev.arjix.Nocturne.gschema.xml
+data/dev.arjix.Nocturne.metainfo.xml.in
 resources/ui/album/button.blp
 resources/ui/album/page.blp
 resources/ui/album/row.blp

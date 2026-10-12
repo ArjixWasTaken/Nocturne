@@ -8,7 +8,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/pages/artists.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/pages/artists.ui")]
     pub struct ArtistsPage {
         #[template_child]
         pub toggle_group_el: TemplateChild<gtk::Widget>,

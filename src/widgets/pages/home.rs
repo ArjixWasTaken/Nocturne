@@ -15,7 +15,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate)]
-    #[template(resource = "/com/jeffser/Nocturne/pages/home.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/pages/home.ui")]
     pub struct HomePage {
         #[template_child]
         pub header_bar: TemplateChild<adw::HeaderBar>,

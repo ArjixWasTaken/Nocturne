@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>com.jeffser.Nocturne</id>
+  <id>dev.arjix.Nocturne</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
 
@@ -22,14 +22,14 @@
     </ul>
   </description>
 
-  <developer id="com.jeffser">
-    <name translate="no">Jeffry Samuel Eduarte Rojas</name>
+  <developer id="dev.arjix">
+    <name translate="no">ArjixWasTaken</name>
   </developer>
 
   <provides>
     <binary>nocturne</binary>
   </provides>
-  <icon type="stock">com.jeffser.Nocturne</icon>
+  <icon type="stock">dev.arjix.Nocturne</icon>
   <categories>
     <category>AudioVideo</category>
     <category>Audio</category>
@@ -44,15 +44,14 @@
     <control>touch</control>
   </recommends>
 
-  <url type="homepage">https://jeffser.com/nocturne</url>
-  <url type="vcs-browser">https://github.com/Jeffser/Nocturne</url>
-  <url type="bugtracker">https://github.com/Jeffser/Nocturne/issues</url>
-  <url type="help">https://github.com/Jeffser/Nocturne/discussions</url>
-  <url type="donation">https://github.com/sponsors/Jeffser</url>
-  <url type="contribute">https://github.com/Jeffser/Nocturne/blob/main/CONTRIBUTING.md</url>
+  <url type="homepage">https://github.com/ArjixWasTaken/Nocturne</url>
+  <url type="vcs-browser">https://github.com/ArjixWasTaken/Nocturne</url>
+  <url type="bugtracker">https://github.com/ArjixWasTaken/Nocturne/issues</url>
+  <url type="help">https://github.com/ArjixWasTaken/Nocturne/discussions</url>
+  <url type="contribute">https://github.com/ArjixWasTaken/Nocturne/blob/dev/CONTRIBUTING.md</url>
 
   <translation type="gettext">nocturne</translation>
-  <launchable type="desktop-id">com.jeffser.Nocturne.desktop</launchable>
+  <launchable type="desktop-id">dev.arjix.Nocturne.desktop</launchable>
   <content_rating type="oars-1.1" />
 
   <branding>
@@ -97,6 +96,12 @@
   </keywords>
 
   <releases>
+    <release version="2.0.0" date="2026-10-12">
+      <url type="details">https://github.com/ArjixWasTaken/Nocturne/releases</url>
+      <description>
+        <p>Rewrite in Rust (gtk4-rs, tokio, sqlx, gstreamer-rs).</p>
+      </description>
+    </release>
     <release version="1.5.2" date="2026-10-16">
       <url type="details">https://github.com/Jeffser/Nocturne/releases/tag/1.5.2</url>
       <description>

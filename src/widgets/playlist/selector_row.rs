@@ -8,7 +8,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, CompositeTemplate, glib::Properties)]
-    #[template(resource = "/com/jeffser/Nocturne/playlist/selector_row.ui")]
+    #[template(resource = "/dev/arjix/Nocturne/playlist/selector_row.ui")]
     #[properties(wrapper_type = super::PlaylistSelectorRow)]
     pub struct PlaylistSelectorRow {
         #[template_child]
