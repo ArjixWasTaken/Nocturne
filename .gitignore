@@ -3,3 +3,4 @@ __pycache__
 gschemas.compiled
 nocturne.gresource
 /target
+.flatpak-builder/
