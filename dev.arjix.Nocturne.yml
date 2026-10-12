@@ -31,10 +31,17 @@ modules:
   - name: nocturne
     builddir: true
     buildsystem: meson
-    # Crates are fetched at build time; for Flathub, vendor them with flatpak-cargo-generator.
+    config-opts:
+      - -Dbuildtype=release
     build-options:
-      build-args:
-        - --share=network
+      env:
+        CARGO_NET_OFFLINE: 'true'
     sources:
       - type: dir
         path: .
+        skip:
+          - target
+          - .flatpak-builder
+      # Vendored crates, regenerate after changing Cargo.lock:
+      #   flatpak-cargo-generator.py Cargo.lock -o cargo-sources.json
+      - cargo-sources.json
