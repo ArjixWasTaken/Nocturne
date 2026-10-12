@@ -210,7 +210,13 @@ fn get<T: serde::de::DeserializeOwned + Default>(v: &Value, path: &[&str]) -> T 
     for p in path {
         cur = &cur[*p];
     }
-    serde_json::from_value(cur.clone()).unwrap_or_default()
+    if cur.is_null() {
+        return T::default();
+    }
+    serde_json::from_value(cur.clone()).unwrap_or_else(|e| {
+        tracing::warn!("subsonic: failed to parse {}: {e}", path.join("."));
+        T::default()
+    })
 }
 
 fn songs(v: &Value, path: &[&str]) -> Vec<SongData> {
@@ -221,7 +227,9 @@ type Params<'a> = Vec<(&'a str, String)>;
 
 impl Subsonic {
     pub fn new(conn: Connection) -> Result<Self> {
-        Ok(Self { http: http_client(conn.trust_server)?, conn, use_api_key: AtomicBool::new(false) })
+        // No username means the password is an OpenSubsonic API key.
+        let api_key = conn.user.is_empty();
+        Ok(Self { http: http_client(conn.trust_server)?, conn, use_api_key: AtomicBool::new(api_key) })
     }
 
     fn base(&self) -> String {
@@ -257,6 +265,7 @@ impl Subsonic {
 
     /// Returns the inner `subsonic-response` object; errors on `status: failed`.
     async fn call(&self, action: &str, params: &[(&str, String)]) -> Result<Value> {
+        tracing::debug!(action, ?params, "subsonic call");
         for _ in 0..2 {
             let mut v: Value = self.http.get(self.url(action, params)).send().await?.error_for_status()?.json().await?;
             let resp = v["subsonic-response"].take();
@@ -264,7 +273,7 @@ impl Subsonic {
                 return Ok(resp);
             }
             let code = resp["error"]["code"].as_i64().unwrap_or(0);
-            if matches!(code, 41 | 42) && !self.use_api_key.swap(true, Ordering::Relaxed) {
+            if matches!(code, 40 | 41 | 42) && !self.use_api_key.swap(true, Ordering::Relaxed) {
                 continue; // retry with apiKey auth
             }
             bail!("{}", resp["error"]["message"].as_str().unwrap_or("Unknown Error"));
@@ -412,6 +421,7 @@ impl Backend for Subsonic {
     }
 
     async fn cover_art(&self, id: &str, size: u32) -> Result<Option<Vec<u8>>> {
+        tracing::debug!(id, size, "subsonic cover");
         let resp = self.http.get(self.url("getCoverArt", &[("id", id.into()), ("size", size.to_string())])).send().await?;
         let is_image = resp.headers().get("content-type").and_then(|v| v.to_str().ok()).is_some_and(|t| t.starts_with("image/"));
         if !resp.status().is_success() || !is_image {
@@ -610,6 +620,44 @@ fn glib_size(bytes: i64) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Live check against a real server:
+    /// `NOCTURNE_TEST_URL=… NOCTURNE_TEST_USER=… NOCTURNE_TEST_PASS=… cargo test -- --ignored live`
+    #[tokio::test]
+    #[ignore]
+    async fn live() {
+        let env = |k| std::env::var(k).unwrap_or_default();
+        let b = Subsonic::new(Connection { url: env("NOCTURNE_TEST_URL"), user: env("NOCTURNE_TEST_USER"), password: env("NOCTURNE_TEST_PASS"), ..Default::default() }).unwrap();
+        b.ping().await.unwrap();
+        let albums = b.album_list(AlbumListKind::Newest, 5, 0).await.unwrap();
+        assert!(!albums.is_empty(), "albums");
+        let album = b.album(&albums[0].id).await.unwrap();
+        assert!(!album.songs.as_ref().unwrap().is_empty(), "album songs");
+        let artists = b.artists(0).await.unwrap();
+        assert!(!artists.is_empty(), "artists");
+        let artist = b.artist(&artists[0].id).await.unwrap();
+        assert!(!artist.albums.unwrap().is_empty(), "artist albums");
+        let pls = b.playlists().await.unwrap();
+        if let Some(p) = pls.first() {
+            assert!(!b.playlist(&p.id).await.unwrap().entries.unwrap().is_empty(), "playlist entries");
+        }
+        let song = &album.songs.unwrap()[0];
+        assert_eq!(b.song(&song.id).await.unwrap().id, song.id);
+        assert!(!b.random_songs(3).await.unwrap().is_empty(), "random");
+        b.starred().await.unwrap();
+        let r = b.search("a", SearchCounts { artist: (3, 0), album: (3, 0), song: (3, 0), playlist: (3, 0) }).await.unwrap();
+        assert!(!r.songs.is_empty(), "search songs");
+        assert!(b.cover_art(&album.cover_art, 240).await.unwrap().is_some(), "cover art");
+        let stream = b.stream_url(&song.id, 0);
+        let resp = reqwest::get(&stream).await.unwrap();
+        assert!(resp.status().is_success(), "stream {}", resp.status());
+        b.play_queue().await.unwrap();
+        b.libraries().await.unwrap();
+        b.server_info().await.unwrap();
+        b.similar_songs(&song.id, 5).await.unwrap();
+        let _ = b.lyrics(&song.id).await;
+        println!("live ok: {} albums, {} artists, {} playlists", albums.len(), artists.len(), pls.len());
+    }
 
     #[test]
     fn md5_token() {

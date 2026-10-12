@@ -236,7 +236,7 @@ impl Integration {
 
     pub async fn verify_song(&self, id: &str, force: bool) -> Song {
         let m = self.song(id);
-        if (force || !m.verified()) && !m.isExternalFile() && m.radioStreamUrl().is_empty() {
+        if (force || (!m.verified() && m.title().is_empty())) && !m.isExternalFile() && m.radioStreamUrl().is_empty() {
             let id = id.to_string();
             if let Some(d) = log_err("song", self.call(move |b| async move { b.song(&id).await }).await) {
                 self.ingest_song(&d);
@@ -281,21 +281,51 @@ impl Integration {
 
     // ---------- cover art ----------
 
-    /// Raw cover bytes (cached in the db).
+    /// The cover id used for `id` (songs share their album's cover).
+    fn cover_id(&self, id: &str) -> String {
+        self.lookup(id).map(|m| m.property::<String>("coverArt")).filter(|c| !c.is_empty()).unwrap_or_else(|| id.to_string())
+    }
+
+    /// Raw cover bytes, cached in the db by cover id.
     pub async fn cover_bytes(&self, id: &str, size: u32) -> Option<Vec<u8>> {
-        let cover_id = self.lookup(id).map(|m| m.property::<String>("coverArt")).filter(|c| !c.is_empty()).unwrap_or_else(|| id.to_string());
+        let cover_id = self.cover_id(id);
         let db = self.db();
         let b = self.backend();
-        let key = id.to_string();
         run(async move {
+            let key = format!("cover:{cover_id}");
             if let Some(bytes) = db::cached_image(&db, &key, size).await {
                 return Some(bytes);
             }
+            // Don't hammer the server when hundreds of rows appear at once.
+            static LIMIT: tokio::sync::Semaphore = tokio::sync::Semaphore::const_new(6);
+            let _permit = LIMIT.acquire().await.ok()?;
             let bytes = b.cover_art(&cover_id, size).await.ok().flatten()?;
             let _ = db::save_image(&db, &key, size, &bytes).await;
             Some(bytes)
         })
         .await
+    }
+
+    /// Decoded cover texture, shared between every model with the same cover
+    /// and de-duplicated while in flight.
+    pub async fn cover_texture(&self, id: &str, size: u32) -> Option<gdk::Texture> {
+        use futures::{FutureExt, future::LocalBoxFuture, future::Shared};
+        type Fut = Shared<LocalBoxFuture<'static, Option<gdk::Texture>>>;
+        thread_local! {
+            static COVERS: RefCell<HashMap<(String, u32), Fut>> = RefCell::default();
+        }
+        let key = (self.cover_id(id), size);
+        let fut = COVERS.with(|c| {
+            c.borrow_mut()
+                .entry(key)
+                .or_insert_with(|| {
+                    let this = self.clone();
+                    let id = id.to_string();
+                    async move { this.cover_bytes(&id, size).await.and_then(|b| texture(&b)) }.boxed_local().shared()
+                })
+                .clone()
+        });
+        fut.await
     }
 
     /// Fill `gdkPaintable` / `gdkPaintableBig` of a loaded model if missing.
@@ -305,7 +335,7 @@ impl Integration {
             if m.property::<Option<gdk::Paintable>>(prop).is_some() {
                 continue;
             }
-            if let Some(tex) = self.cover_bytes(id, size).await.and_then(|b| texture(&b)) {
+            if let Some(tex) = self.cover_texture(id, size).await {
                 m.set_property(prop, Some(tex.upcast::<gdk::Paintable>()));
             }
         }

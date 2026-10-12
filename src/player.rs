@@ -404,6 +404,7 @@ impl Player {
                 return;
             }
             let _ = i.playbin.set_state(gst::State::Ready);
+            tracing::debug!(%uri, "playing");
             i.playbin.set_property("uri", &uri);
         }
         let target = if i.pause_next_change.replace(false) { gst::State::Paused } else { gst::State::Playing };
